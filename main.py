@@ -1,5 +1,5 @@
 if __name__ == '__main__':
     import sys
-    from analyzer.app import app
+    from application.app import app
 
     sys.exit(app.exec())

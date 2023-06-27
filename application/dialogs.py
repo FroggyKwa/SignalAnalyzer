@@ -2,8 +2,8 @@ from PyQt5 import uic
 
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QVBoxLayout, QLabel
 
-from analyzer import consts
-from analyzer.consts import ABOUT_PATH
+from application import consts
+from application.consts import ABOUT_PATH
 
 
 class AboutDialog(QDialog):
