@@ -1,6 +1,6 @@
 import pyqtgraph
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QAction, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QAction
 
 from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT
 from application.dialogs import AboutDialog
@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
         # Open file menu action
         self.open_file_action = QAction(OPEN_ACTION_TEXT, self)
         self.menu.addAction(self.open_file_action)
-        self.open_file_action.triggered.connect(lambda: open_file_dialog(self))
+        self.open_file_action.triggered.connect(lambda: self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
 
         # Analyzing menu action
 
@@ -49,7 +49,16 @@ class MainWindow(QMainWindow):
             self.plots.append(pyqtgraph.PlotWidget())
             self.graphs_layout.addWidget(self.plots[-1])
             self.plots[-1].plot(*plot, pen='b')
+            self.plots[-1].setMouseEnabled(x=True, y=False)
             self.plots[-1].setLabel(axis='bottom', text=name)
+
+    @staticmethod
+    def clear_layout(layout):
+        while layout.count():
+            child = layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
+        return True
 
     @staticmethod
     def open_about_us_dialog():
