@@ -14,16 +14,19 @@
    <string>Analyzer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>10</y>
-      <width>781</width>
-      <height>491</height>
+      <width>751</width>
+      <height>551</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="graphs_layout">
+    <layout class="QVBoxLayout" name="content_layout">
+     <property name="spacing">
+      <number>10</number>
+     </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetFixedSize</enum>
      </property>
@@ -33,13 +36,23 @@
         <number>10</number>
        </property>
        <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
+        <enum>QLayout::SetMinimumSize</enum>
        </property>
        <property name="leftMargin">
         <number>10</number>
        </property>
        <property name="bottomMargin">
         <number>10</number>
+       </property>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="graphs_layout">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetFixedSize</enum>
        </property>
       </layout>
      </item>
@@ -52,7 +65,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>30</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
