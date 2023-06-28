@@ -1,11 +1,12 @@
 import pyqtgraph
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QAction, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QAction
 
 from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT
 from application.dialogs import AboutDialog
 from application.utils import open_file_dialog, show_signal_information, open_warning_messagebox
 from signal.signal import Signal
+from utils import MyCheckBox
 
 
 class MainWindow(QMainWindow):
@@ -19,6 +20,7 @@ class MainWindow(QMainWindow):
         self.show()
 
     def setupUi(self):
+        self.action_list = []
         # About us menu trigger
         self.menu_6.aboutToShow.connect(self.open_about_us_dialog)
 
@@ -26,7 +28,6 @@ class MainWindow(QMainWindow):
         self.open_file_action = QAction(OPEN_ACTION_TEXT, self)
         self.menu.addAction(self.open_file_action)
         self.open_file_action.triggered.connect(lambda: open_file_dialog(self))
-
         # Analyzing menu action
 
         self.signal_information_action = QAction(SIGNAL_INFORMATION_ACTION_TEXT, self)
@@ -49,13 +50,18 @@ class MainWindow(QMainWindow):
         for name, plot in plots.items():
             self.plots.append(pyqtgraph.PlotWidget())
             self.graphs_layout.addWidget(self.plots[-1])
+
+            checkbox = MyCheckBox(name, self.plots[-1], checked=True)
+            checkbox.stateChanged.connect(checkbox.change_visible)
+            self.name_plot_layout.addWidget(checkbox)
+            self.action_list.append((self.plots, checkbox))
             self.plots[-1].plot(*plot, pen='b')
             self.plots[-1].setLabel(axis='bottom', text=name)
-            self.plots[-1].setFixedSize(self.size().width() - 50, (self.size().height() - 70) / len(plots) - 10)
+            self.plots[-1].setFixedSize(self.size().width() - 50, (self.size().height() - 70) // len(plots) - 10)
 
     def resizeEvent(self, event):
         for plot in self.plots:
-            plot.setFixedSize(self.size().width() - 50, (self.size().height() - 70) / len(self.plots) - 10)
+            plot.setFixedSize(self.size().width() - 50, (self.size().height() - 70) // len(self.plots) - 10)
 
     @staticmethod
     def open_about_us_dialog():

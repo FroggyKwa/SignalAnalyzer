@@ -1,6 +1,6 @@
 import os
 
-from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QCheckBox
 
 from views.information_dialog import InformationDialog
 
@@ -30,3 +30,15 @@ def open_warning_messagebox(title, text):
     msgBox.setStandardButtons(QMessageBox.Ok)
     msgBox.buttonClicked.connect(msgBox.close)
     returnValue = msgBox.exec()
+
+
+class MyCheckBox(QCheckBox):
+    def __init__(self, name, plot, checked=True):
+        super().__init__(name, checked=checked)
+        self.plot = plot
+
+    def change_visible(self):
+        if self.isChecked():
+            self.plot.show()
+        else:
+            self.plot.hide()
