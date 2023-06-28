@@ -23,10 +23,10 @@ def show_signal_information(**info):
 
 
 def open_warning_messagebox(title, text):
-    msgBox = QMessageBox()
-    msgBox.setIcon(QMessageBox.Warning)
-    msgBox.setText(text)
-    msgBox.setWindowTitle(title)
-    msgBox.setStandardButtons(QMessageBox.Ok)
-    msgBox.buttonClicked.connect(msgBox.close)
-    returnValue = msgBox.exec()
+    msg_box = QMessageBox()
+    msg_box.setIcon(QMessageBox.Warning)
+    msg_box.setText(text)
+    msg_box.setWindowTitle(title)
+    msg_box.setStandardButtons(QMessageBox.Ok)
+    msg_box.buttonClicked.connect(msg_box.close)
+    return_value = msg_box.exec()

@@ -6,6 +6,7 @@ from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMA
     ERROR_TEXT
 from application.dialogs import AboutDialog
 from application.utils import open_file_dialog, show_signal_information, open_warning_messagebox
+from plot_widget import MyPlotWidget
 from signal.signal import Signal
 
 
@@ -47,7 +48,7 @@ class MainWindow(QMainWindow):
 
     def add_data_to_plots(self, plots):
         for name, plot in plots.items():
-            self.plots.append(pyqtgraph.PlotWidget())
+            self.plots.append(MyPlotWidget(self, plot_data=plot, frequency=self.signal.frequency))
             self.graphs_layout.addWidget(self.plots[-1])
             self.plots[-1].plot(*plot, pen='b')
             self.plots[-1].setMouseEnabled(x=True, y=False)

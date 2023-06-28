@@ -49,4 +49,5 @@ class Signal:
                 self.names[i]: (times, self.channels[i])
                 for i in range(len(self.channels))
             }
+            print(plots.keys())
             return plots

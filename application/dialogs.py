@@ -1,9 +1,11 @@
 from PyQt5 import uic
 
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QVBoxLayout, QLabel
+from pyqtgraph import PlotWidget
+import pyqtgraph as pg
 
 from application import consts
-from application.consts import ABOUT_PATH
+from application.consts import ABOUT_PATH, SCALED_PLOT_PATH
 
 
 class AboutDialog(QDialog):
