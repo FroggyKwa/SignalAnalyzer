@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import numpy as np
 import pyqtgraph as pg
+from PyQt5.QtWidgets import QMenu
 from pyqtgraph import PlotWidget, InfiniteLine
+
+from consts import SIGNAL_FRAGMENT_ACTION_TEXT
+from utils import show_fragment_dialog
 
 
 class MyPlotWidget(PlotWidget):
@@ -16,6 +20,12 @@ class MyPlotWidget(PlotWidget):
         self.line_2 = None
         self.plot_data = plot_data
         self.frequency = frequency
+    def contextMenuEvent(self, event):
+        contextMenu = QMenu(self)
+        fragment_action = contextMenu.addAction(SIGNAL_FRAGMENT_ACTION_TEXT)
+        action = contextMenu.exec_(self.mapToGlobal(event.pos()))
+        if action == fragment_action:
+            show_fragment_dialog(self)
 
     def mouse_clicked(self, event):
         vb = self.plotItem.vb
@@ -48,8 +58,11 @@ class MyPlotWidget(PlotWidget):
             self.addItem(line)
             return mouse_point.x(), mouse_point.y()
 
-    def open_scaled_plot(self):
-        print(self.border_left, self.border_right)
+    def open_scaled_plot(self, border_left=-1, border_right=-1):
+        if border_left != -1 and border_right != -1:
+            self.border_left = border_left
+            self.border_right = border_right
+
         data = self.plot_data[1][int(self.border_left * self.frequency):int(self.border_right * self.frequency)]
         times = np.linspace(self.border_left,
                             self.border_right,

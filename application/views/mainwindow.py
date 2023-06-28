@@ -1,11 +1,10 @@
-import pyqtgraph
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction
 
 from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
-    ERROR_TEXT
-from application.dialogs import AboutDialog
-from application.utils import open_file_dialog, show_signal_information, open_warning_messagebox
+    ERROR_TEXT, SIGNAL_FRAGMENT_ACTION_TEXT
+from application.dialogs import AboutDialog, open_warning_messagebox
+from application.utils import open_file_dialog, show_signal_information
 from plot_widget import MyPlotWidget
 from signal.signal import Signal
 
@@ -26,7 +25,8 @@ class MainWindow(QMainWindow):
         # Open file menu action
         self.open_file_action = QAction(OPEN_ACTION_TEXT, self)
         self.menu.addAction(self.open_file_action)
-        self.open_file_action.triggered.connect(lambda: self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
+        self.open_file_action.triggered.connect(
+            lambda: self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
 
         # Analyzing menu action
 
@@ -38,6 +38,10 @@ class MainWindow(QMainWindow):
             frequency=self.signal.frequency,
             start_datetime=self.signal.start_datetime,
         ))
+
+        # self.fragment_action = QAction(SIGNAL_FRAGMENT_ACTION_TEXT, self)
+        # self.menu_7.addAction(self.fragment_action)
+        # self.fragment_action.triggered.connect(lambda: show_fragment_dialog())
 
     def setup_signal_from_file(self, filename):
         try:
