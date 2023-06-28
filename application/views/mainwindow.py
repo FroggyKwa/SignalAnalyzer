@@ -12,6 +12,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi(MAINWINDOW_PATH, self)
+        self.setMinimumHeight(800)
         self.plots = []
         self.signal = Signal()
         self.setupUi()
@@ -50,6 +51,11 @@ class MainWindow(QMainWindow):
             self.graphs_layout.addWidget(self.plots[-1])
             self.plots[-1].plot(*plot, pen='b')
             self.plots[-1].setLabel(axis='bottom', text=name)
+            self.plots[-1].setFixedSize(self.size().width() - 50, (self.size().height() - 70) / len(plots) - 10)
+
+    def resizeEvent(self, event):
+        for plot in self.plots:
+            plot.setFixedSize(self.size().width() - 50, (self.size().height() - 70) / len(self.plots) - 10)
 
     @staticmethod
     def open_about_us_dialog():
