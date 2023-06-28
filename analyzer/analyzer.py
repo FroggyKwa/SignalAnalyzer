@@ -1,8 +1,53 @@
+import datetime
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+
 class Analyzer:
-    def __init__(self, file=None):
+    def __init__(self, signal=None, file=None, n_channels=None, n_samples=None, frequency=None):
+        self.signal = signal
         self.file = file
-        self.data = None
+        self.n_channels = n_channels
+        self.n_samples = n_samples
+        self.frequency = frequency
+        self.channels = None
+        self.start_datetime = None
+        self.names = None
 
     def load_file(self, filename):
+        """
+        Load file and pass data to analyzer
+        :param filename: name of file to scan
+        :return: None
+        """
         with open(filename, 'r') as file:
-            print(file.readlines())
+
+            # next(file) - for skipping line comments. I think it is faster than reading line from file
+            next(file)
+            self.n_channels = int(file.readline().strip())
+            next(file)
+            self.n_samples = int(file.readline().strip())
+            next(file)
+            self.frequency = float(file.readline().strip())
+            next(file)
+            start_date = file.readline().strip()
+            next(file)
+            start_time = file.readline().strip()
+            self.start_datetime = datetime.datetime.strptime(' '.join([start_date, start_time]),
+                                                             '%d-%m-%Y %H:%M:%S.%f')
+            next(file)
+            self.names = file.readline().strip().split(';')
+
+            self.channels = [[] for _ in range(self.n_channels)]
+
+            for line in file:
+                for index, data in enumerate(line.strip().split(' ')):
+                    self.channels[index % len(self.channels)].append(float(data))
+
+            times = np.linspace(0, self.n_samples / self.frequency, num=self.n_samples)
+            plots = {
+                self.names[i]: (times, self.channels[i])
+                for i in range(len(self.channels))
+            }
+            return plots

@@ -1,3 +1,4 @@
+import pyqtgraph
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction
 
@@ -11,6 +12,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi(MAINWINDOW_PATH, self)
+        self.plots = []
         self.analyzer = Analyzer()
         self.setupUi()
         self.show()
@@ -22,7 +24,14 @@ class MainWindow(QMainWindow):
         self.open_file_action.triggered.connect(lambda: open_file_dialog(self))
 
     def setup_signal_from_file(self, filename):
-        self.analyzer.load_file(filename)
+        self.add_data_to_plots(self.analyzer.load_file(filename))
+
+    def add_data_to_plots(self, plots):
+        for name, plot in plots.items():
+            self.plots.append(pyqtgraph.PlotWidget())
+            self.graphs_layout.addWidget(self.plots[-1])
+            self.plots[-1].plot(*plot, pen='b')
+            self.plots[-1].setLabel(axis='bottom', text=name)
 
     @staticmethod
     def open_about_us_dialog():
