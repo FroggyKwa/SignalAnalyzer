@@ -1,10 +1,11 @@
-import pyqtgraph
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QAction, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QAction
 
-from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT
-from application.dialogs import AboutDialog
-from application.utils import open_file_dialog, show_signal_information, open_warning_messagebox
+from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
+    ERROR_TEXT, SIGNAL_FRAGMENT_ACTION_TEXT
+from application.dialogs import AboutDialog, open_warning_messagebox
+from application.utils import open_file_dialog, show_signal_information
+from plot_widget import MyPlotWidget
 from signal.signal import Signal
 
 
@@ -25,7 +26,8 @@ class MainWindow(QMainWindow):
         # Open file menu action
         self.open_file_action = QAction(OPEN_ACTION_TEXT, self)
         self.menu.addAction(self.open_file_action)
-        self.open_file_action.triggered.connect(lambda: open_file_dialog(self))
+        self.open_file_action.triggered.connect(
+            lambda: self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
 
         # Analyzing menu action
 
@@ -38,24 +40,37 @@ class MainWindow(QMainWindow):
             start_datetime=self.signal.start_datetime,
         ))
 
+        # self.fragment_action = QAction(SIGNAL_FRAGMENT_ACTION_TEXT, self)
+        # self.menu_7.addAction(self.fragment_action)
+        # self.fragment_action.triggered.connect(lambda: show_fragment_dialog())
+
     def setup_signal_from_file(self, filename):
         try:
             self.add_data_to_plots(self.signal.load_file(filename))
         except ValueError:
-            open_warning_messagebox(title='Ошибка!',
-                                    text='Произошла ошибка при чтении файла! \nНеверный формат!')
+            open_warning_messagebox(title=ERROR_TITLE,
+                                    text=ERROR_TEXT)
 
     def add_data_to_plots(self, plots):
         for name, plot in plots.items():
-            self.plots.append(pyqtgraph.PlotWidget())
+            self.plots.append(MyPlotWidget(self, plot_data=plot, frequency=self.signal.frequency))
             self.graphs_layout.addWidget(self.plots[-1])
             self.plots[-1].plot(*plot, pen='b')
+            self.plots[-1].setMouseEnabled(x=True, y=False)
             self.plots[-1].setLabel(axis='bottom', text=name)
             self.plots[-1].setFixedSize(self.size().width() - 50, (self.size().height() - 70) / len(plots) - 10)
 
     def resizeEvent(self, event):
         for plot in self.plots:
             plot.setFixedSize(self.size().width() - 50, (self.size().height() - 70) / len(self.plots) - 10)
+
+    @staticmethod
+    def clear_layout(layout):
+        while layout.count():
+            child = layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
+        return True
 
     @staticmethod
     def open_about_us_dialog():

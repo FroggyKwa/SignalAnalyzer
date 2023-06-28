@@ -2,6 +2,7 @@ import os
 
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
+from dialogs import FragmentDialog
 from views.information_dialog import InformationDialog
 
 
@@ -22,11 +23,8 @@ def show_signal_information(**info):
     info_dialog.exec()
 
 
-def open_warning_messagebox(title, text):
-    msgBox = QMessageBox()
-    msgBox.setIcon(QMessageBox.Warning)
-    msgBox.setText(text)
-    msgBox.setWindowTitle(title)
-    msgBox.setStandardButtons(QMessageBox.Ok)
-    msgBox.buttonClicked.connect(msgBox.close)
-    returnValue = msgBox.exec()
+def show_fragment_dialog(plot_widget):
+    fragment_dialog = FragmentDialog(plot_widget)
+    fragment_dialog.exec()
+
+
