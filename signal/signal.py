@@ -4,12 +4,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-class Analyzer:
-    def __init__(self, signal=None, file=None, n_channels=None, n_samples=None, frequency=None):
-        self.signal = signal
+class Signal:
+    def __init__(self, file=None, n_channels=None, n_signals=None, frequency=None):
         self.file = file
         self.n_channels = n_channels
-        self.n_samples = n_samples
+        self.n_signals = n_signals
         self.frequency = frequency
         self.channels = None
         self.start_datetime = None
@@ -17,7 +16,7 @@ class Analyzer:
 
     def load_file(self, filename):
         """
-        Load file and pass data to analyzer
+        Load file and pass data to signal
         :param filename: name of file to scan
         :return: None
         """
@@ -27,7 +26,7 @@ class Analyzer:
             next(file)
             self.n_channels = int(file.readline().strip())
             next(file)
-            self.n_samples = int(file.readline().strip())
+            self.n_signals = int(file.readline().strip())
             next(file)
             self.frequency = float(file.readline().strip())
             next(file)
@@ -45,7 +44,7 @@ class Analyzer:
                 for index, data in enumerate(line.strip().split(' ')):
                     self.channels[index % len(self.channels)].append(float(data))
 
-            times = np.linspace(0, self.n_samples / self.frequency, num=self.n_samples)
+            times = np.linspace(0, self.n_signals / self.frequency, num=self.n_signals)
             plots = {
                 self.names[i]: (times, self.channels[i])
                 for i in range(len(self.channels))
