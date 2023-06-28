@@ -2,7 +2,8 @@ import pyqtgraph
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction
 
-from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT
+from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
+    ERROR_TEXT
 from application.dialogs import AboutDialog
 from application.utils import open_file_dialog, show_signal_information, open_warning_messagebox
 from signal.signal import Signal
@@ -41,8 +42,8 @@ class MainWindow(QMainWindow):
         try:
             self.add_data_to_plots(self.signal.load_file(filename))
         except ValueError:
-            open_warning_messagebox(title='Ошибка!',
-                                    text='Произошла ошибка при чтении файла! \nНеверный формат!')
+            open_warning_messagebox(title=ERROR_TITLE,
+                                    text=ERROR_TEXT)
 
     def add_data_to_plots(self, plots):
         for name, plot in plots.items():
