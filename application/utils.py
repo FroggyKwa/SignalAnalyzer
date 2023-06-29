@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QFileDialog, QCheckBox
 
 import plot_modelling
 from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse, open_warning_messagebox
-from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse
+from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp
 from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog
 from views.information_dialog import InformationDialog
 
@@ -68,6 +68,14 @@ def open_about_us_dialog():
 
 def open_delayed_single_impulse_dialog(parent=None):
     DelayedSingleImpulse(parent=parent).exec()
+
+
+def open_delayed_single_leap_dialog():
+    DelayedSingleLeap().exec()
+
+
+def open_decreasing_exp_dialog():
+    DecreasingExp().exec()
 
 
 def model_plot(window, plot_type=None, **kwargs):
