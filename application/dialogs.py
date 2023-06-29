@@ -1,9 +1,8 @@
 from PyQt5 import uic
-from PyQt5.QtWidgets import QDialog, QMessageBox
+from PyQt5.QtWidgets import QDialog, QMessageBox, QHeaderView, QTableWidgetItem
 
 from application import consts
 from application.consts import *
-
 from application.consts import DELAYED_SINGLE_LEAP_PATH, DECREASING_EXP_PATH
 from application.consts import SINUSOID_PATH, MEANDER_PATH, SAW_PATH
 from plot_modelling import PlotType
@@ -367,6 +366,7 @@ class WhiteNoiseNormalisedDialog(QDialog):
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
 
 
+
 class FragmentDialog(QDialog):
     def __init__(self, plot_widget=None):
         super(QDialog, self).__init__()
@@ -392,6 +392,115 @@ class FragmentDialog(QDialog):
 
     def end_button_handler(self):
         self.stop.setPlainText(str(self.plot_widget.plot_data[0][-1]))
+
+
+class StatisticDialog(QDialog):
+    def __init__(self,
+                 average=None,
+                 dispersion=None,
+                 standard_deviation=None,
+                 coef_of_variation=None,
+                 skewness=None,
+                 excess_kurtosis=None,
+                 minimal_value=None,
+                 maximum_value=None,
+                 quantile_005=None,
+                 quantile_095=None,
+                 median=None,
+                 ):
+        super(QDialog, self).__init__()
+        uic.loadUi(STATISTICS_PATH, self)
+        self.average = average
+        self.dispersion = dispersion
+        self.standard_deviation = standard_deviation
+        self.coef_of_variation = coef_of_variation
+        self.skewness = skewness
+        self.excess_kurtosis = excess_kurtosis
+        self.minimal_value = minimal_value
+        self.maximum_value = maximum_value
+        self.quantile_005 = quantile_005
+        self.quantile_095 = quantile_095
+        self.median = median
+        self.setupUi()
+
+    def setupUi(self):
+        COLUMNS = 2
+        ROWS = 11
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setColumnCount(COLUMNS)
+        self.table.setRowCount(ROWS)
+        self.table.setHorizontalHeaderLabels(['Информация', 'Значение'])
+
+        info = [
+            {'Среднее': self.average},
+            {'Дисперсия': self.dispersion},
+            {'Среднеквадратичное отклонение': self.standard_deviation},
+            {'Коэффициент вариации': self.coef_of_variation},
+            {'Коэффициент асимметрии': self.skewness},
+            {'Коэффициент эксцесса': self.excess_kurtosis},
+            {'Минимальное значение сигнала': self.minimal_value},
+            {'Максимальное значение сигнала': self.maximum_value},
+            {'Квантиль порядка 0.05': self.quantile_005},
+            {'Квантиль порядка 0.95': self.quantile_095},
+            {'Медиана': self.median},
+        ]
+        cnt = 0
+        for i in info:
+            for name, value in i.items():
+                self.table.setItem(cnt, 0, QTableWidgetItem(str(name)))
+                self.table.setItem(cnt, 1, QTableWidgetItem(str(value)))
+            cnt += 1
+
+
+class BaseOperationDialog(QDialog):
+    def __init__(self, parent=None, operation=None, operation_sign=''):
+        super(QDialog, self).__init__(parent=parent)
+        uic.loadUi(OPERATION_PATH, self)
+        self.names = list(self.parent().signal.plots.keys())
+        self.operation = operation
+        self.operation_sign = operation_sign
+        self.setupUi()
+
+    def setupUi(self):
+        self.setFixedSize(self.width(), self.height())
+
+        if self.operation_sign == '+':
+            self.setWindowTitle('Сложение каналов')
+        elif self.operation_sign == '*':
+            self.setWindowTitle('Умножение каналов')
+
+        self.operand_1.addItems(self.names)
+        self.operand_2.addItems(self.names)
+        self.calculate_button.clicked.connect(self.clicked)
+        self.show()
+
+    def clicked(self):
+        from utils import add_data_to_plots
+        name_1 = self.operand_1.currentText()
+        name_2 = self.operand_2.currentText()
+        data = {f'{name_1} {self.operation_sign} {name_2}':
+                    self.operation(self.parent().signal.plots[name_1],
+                                   self.parent().signal.plots[name_2])}
+        self.parent().signal.plots |= data
+        if name_1 and name_2:
+            add_data_to_plots(
+                self.parent(),
+                data)
+        else:
+            open_warning_messagebox('Ошибка!', 'Не выбраны все операнды!')
+
+
+class AdditionDialog(BaseOperationDialog):
+    def __init__(self, parent=None):
+        from utils import sum_plots
+        super().__init__(parent=parent, operation=sum_plots, operation_sign='+')
+
+
+class MultiplicationDialog(BaseOperationDialog):
+    def __init__(self, parent=None):
+        from utils import multiple_plots
+        super().__init__(parent=parent, operation=multiple_plots, operation_sign='*')
 
 
 def open_warning_messagebox(title, text):

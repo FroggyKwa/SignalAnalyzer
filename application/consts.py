@@ -4,6 +4,8 @@ INFORMATION_PATH = 'ui/information.ui'
 
 FRAGMENT_PATH = 'ui/fragment.ui'
 
+OPERATION_PATH = 'ui/operation.ui'
+
 SAW_NAME = 'Пила'
 SAW_PATH = 'ui/saw_dialog.ui'
 
@@ -71,3 +73,5 @@ TONAL_ENVELOPE_NAME = 'Cигнал с тональной огибающей. - �
 
 LINEAR_FREQUENCY_MODULATION_PATH = 'ui/LinearFrequencyModulation.ui'
 LINEAR_FREQUENCY_MODULATION_NAME = 'Сигнал с линейной частотной модуляцией (ЛЧМ - сигнал)'
+
+STATISTICS_PATH = 'ui/Statistics.ui'
