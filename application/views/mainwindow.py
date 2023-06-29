@@ -6,7 +6,8 @@ from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
     open_delayed_single_impulse_dialog, add_data_to_plots, open_delayed_single_leap_dialog, open_decreasing_exp_dialog, \
     open_exp_envelope_dialog, open_balance_envelope_dialog, open_white_noise_dialog, open_white_noise_normalised_dialog, \
-    open_tonal_envelope_dialog, linear_frequency_modulation_dialog, save_as, save_file_dialog
+    open_tonal_envelope_dialog, linear_frequency_modulation_dialog, save_as, save_file_dialog, open_addition_dialog, \
+    open_multiplication_dialog
 from application.utils import open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
 from signal.signal import Signal
 
@@ -93,9 +94,12 @@ class MainWindow(QMainWindow):
 
         self.addition_signals_action = QAction(ADDITION_CHANNELS_NAME, self)
         self.menu_7.addAction(self.addition_signals_action)
+        self.addition_signals_action.triggered.connect(lambda: open_addition_dialog(self))
 
         self.multiplication_signals_action = QAction(MULTIPLICATION_CHANNELS_NAME, self)
         self.menu_7.addAction(self.multiplication_signals_action)
+        self.multiplication_signals_action.triggered.connect(lambda: open_multiplication_dialog(self))
+
 
     def setup_signal_from_file(self, filename):
         try:
@@ -108,8 +112,9 @@ class MainWindow(QMainWindow):
         for plot in self.plots:
             plot.setFixedSize(self.size().width() - 50, (self.size().height() - 70) // len(self.plots) - 10)
 
-    @staticmethod
-    def clear_layout(layout):
+    def clear_layout(self, layout):
+        self.plots.clear()
+        self.signal = Signal()
         while layout.count():
             child = layout.takeAt(0)
             if child.widget():

@@ -4,6 +4,8 @@ INFORMATION_PATH = 'ui/information.ui'
 
 FRAGMENT_PATH = 'ui/fragment.ui'
 
+OPERATION_PATH = 'ui/operation.ui'
+
 SAW_NAME = 'Пила'
 SAW_PATH = 'ui/saw_dialog.ui'
 

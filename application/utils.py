@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QFileDialog, QCheckBox
 
 import plot_modelling
 from dialogs import AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp, BalanceEnvelope, TonalEnvelope, \
-    LinearFrequencyModulation
+    LinearFrequencyModulation, AdditionDialog, MultiplicationDialog
 from dialogs import ExpEnvelope
 from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog, WhiteNoiseDialog, \
     WhiteNoiseNormalisedDialog
@@ -139,6 +139,14 @@ def linear_frequency_modulation_dialog(parent=None):
 
 def open_saw_dialog(parent=None):
     SawDialog(parent).exec()
+
+
+def open_addition_dialog(parent=None):
+    AdditionDialog(parent=parent).exec()
+
+
+def open_multiplication_dialog(parent=None):
+    MultiplicationDialog(parent=parent).exec()
 
 
 def open_meander_dialog(parent=None):
