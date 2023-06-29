@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QDialog, QMessageBox
 
 from application import consts
 from application.consts import ABOUT_PATH, FRAGMENT_PATH, SINUSOID_PATH, MEANDER_PATH, SAW_PATH
+from application.consts import ABOUT_PATH, FRAGMENT_PATH, DELAYED_SINGLE_IMPULSE, DELAYED_SINGLE_LEAP_PATH, DECREASING_EXP_PATH
 from application.consts import ABOUT_PATH, FRAGMENT_PATH, DELAYED_SINGLE_IMPULSE
 from application.consts import ABOUT_PATH, FRAGMENT_PATH, EXP_ENVELOPE_PATH, BALANCE_ENVELOPE_PATH
 from plot_modelling import PlotType
@@ -109,6 +110,29 @@ class DelayedSingleImpulse(QDialog):
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
         model_plot(self.parent(), plot_type=self.plot_type.name, **data)
 
+
+class DelayedSingleLeap(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi(DELAYED_SINGLE_LEAP_PATH, self)
+        self.setWindowTitle(consts.SAW_NAME)
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.build_plot_button.clicked.connect(self.close)
+
+
+class DecreasingExp(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi(DECREASING_EXP_PATH, self)
+        self.setWindowTitle(consts.SAW_NAME)
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.build_plot_button.clicked.connect(self.close)
 
 def open_warning_messagebox(title, text):
     msg_box = QMessageBox()

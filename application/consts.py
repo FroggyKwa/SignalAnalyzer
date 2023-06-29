@@ -18,10 +18,6 @@ DELAYED_SINGLE_LEAP_NAME = 'Задержанный единичный скачо
 DECREASING_EXP = 'Дискретизированная убывающая экспонента'
 
 
-DELAYED_SINGLE_IMPULSE_NAME = 'Задержанный единичный импульс'
-DELAYED_SINGLE_LEAP_NAME = 'Задержанный единичный скачок'
-DECREASING_EXP = 'Дискретизированная убывающая экспонента'
-
 WHITE_NOISE_INTERVAL_NAME = 'Сигнала белого шума,  равномерно распределенного в интервале'
 WHITE_NOISE_INTERVAL_PATH = ''
 

@@ -6,7 +6,9 @@ from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMA
     DECREASING_EXP
 from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
-    open_delayed_single_impulse_dialog, open_exp_envelope_dialog, open_balance_envelope_dialog, add_data_to_plots
+    open_delayed_single_impulse_dialog, add_data_to_plots, open_delayed_single_leap_dialog, open_decreasing_exp_dialog, \
+    open_exp_envelope_dialog, open_balance_envelope_dialog
+
 
 from application.utils import open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
 from signal.signal import Signal
@@ -48,7 +50,9 @@ class MainWindow(QMainWindow):
             lambda: open_delayed_single_impulse_dialog(self)
         )
         self.delayed_single_leap_action = QAction(DELAYED_SINGLE_LEAP_NAME, self)
+        self.delayed_single_leap_action.triggered.connect(open_delayed_single_leap_dialog)
         self.dicreasing_exp = QAction(DECREASING_EXP, self)
+        self.dicreasing_exp.triggered.connect(open_decreasing_exp_dialog)
 
         self.open_sinusoid = QAction(SINUSOID_NAME, self)
         self.open_meander = QAction(MEANDER_NAME, self)
@@ -58,9 +62,6 @@ class MainWindow(QMainWindow):
         self.menu_2.addAction(self.delayed_single_leap_action)
         self.menu_2.addAction(self.dicreasing_exp)
 
-        self.menu_2.addAction(self.open_sinusoid)
-        self.menu_2.addAction(self.open_meander)
-        self.menu_2.addAction(self.saw)
 
         self.exp_envelope_action.triggered.connect(open_exp_envelope_dialog)
         self.balance_envelope_action.triggered.connect(open_balance_envelope_dialog)
