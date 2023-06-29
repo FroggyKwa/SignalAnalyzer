@@ -37,6 +37,7 @@ def save_file_dialog(mainwindow):
 
 def add_data_to_plots(window, plots, **kwargs):
     from plot_widget import MyPlotWidget
+    n = len(window.plots) + len(plots)
     for name, plot in plots.items():
         window.plots.append(
             MyPlotWidget(
@@ -50,7 +51,9 @@ def add_data_to_plots(window, plots, **kwargs):
         window.plots[-1].plot(*plot, pen='b')
         window.plots[-1].setMouseEnabled(x=True, y=False)
         window.plots[-1].setLabel(axis='bottom', text=name)
-        window.plots[-1].setFixedSize(window.size().width() - 50, (window.size().height() - 70) // len(plots) - 10)
+
+        for p in window.plots:
+            p.setFixedSize(window.size().width() - 50, (window.size().height() - 70) // n - 10)
 
 
 def show_signal_information(**info):
