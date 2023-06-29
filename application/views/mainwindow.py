@@ -2,8 +2,8 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction
 
 from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
-    ERROR_TEXT, SIGNAL_FRAGMENT_ACTION_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME
-from application.dialogs import AboutDialog, open_warning_messagebox
+    ERROR_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME
+from application.dialogs import open_warning_messagebox, AboutDialog
 from application.utils import open_file_dialog, show_signal_information
 from plot_widget import MyPlotWidget
 from signal.signal import Signal
@@ -80,4 +80,8 @@ class MainWindow(QMainWindow):
             if child.widget():
                 child.widget().deleteLater()
         return True
+
+    @staticmethod
+    def open_about_us_dialog():
+        AboutDialog().exec()
 
