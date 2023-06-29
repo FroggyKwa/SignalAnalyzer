@@ -75,3 +75,5 @@ LINEAR_FREQUENCY_MODULATION_PATH = 'ui/LinearFrequencyModulation.ui'
 LINEAR_FREQUENCY_MODULATION_NAME = 'Сигнал с линейной частотной модуляцией (ЛЧМ - сигнал)'
 
 STATISTICS_PATH = 'ui/Statistics.ui'
+
+HISTOGRAM_PATH = 'ui/histogram.ui'

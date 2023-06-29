@@ -1,5 +1,13 @@
+import matplotlib
+from PyQt5 import uic
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QDialog, QMainWindow
 from matplotlib import pyplot as plt
-from numpy import linspace, histogram as np_histogram
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+from matplotlib.figure import Figure
+
+from consts import HISTOGRAM_PATH
+
+matplotlib.use('Qt5Agg')
 
 
 def average(p):
@@ -27,11 +35,11 @@ def excess_kurtosis(p):
 
 
 def minimal_value(p):
-    return min(p[1])
+    return min(p)
 
 
 def maximum_value(p):
-    return max(p[1])
+    return max(p)
 
 
 def _quantile(p, a):
@@ -69,10 +77,41 @@ def histogram(p, h: float = 0.1):
     # y, x = np_histogram(p[1], bins=intervals)
     plt.hist(p[1], bins=intervals)
     plt.show()
-    # return y, x
-#
-# import random
-# print(histogram(([], [random.randint(0, 100) for i in range(100000)])))
-#
-#
 
+
+matplotlib.use('QT5Agg')
+
+# Matplotlib canvas class to create figure
+import matplotlib
+
+matplotlib.use('Qt5Agg')
+
+
+class MplCanvas(FigureCanvasQTAgg):
+    def __init__(self, parent=None, width=5, height=4, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = fig.add_subplot(111)
+        super(MplCanvas, self).__init__(fig)
+
+
+class HistoWidget(QDialog):
+
+    def __init__(self, plot, h=0.1, *args, **kwargs):
+        super(QWidget, self).__init__(*args, **kwargs)
+        self.plot = plot
+        uic.loadUi(HISTOGRAM_PATH, self)
+
+        sc = MplCanvas(self, width=5, height=4, dpi=100)
+        start, end = int(minimal_value(plot)), int(maximum_value(plot))
+        c = 0  # counter
+        intervals = []
+        while start + c * h < end:
+            intervals.append(start + c * h)
+            c += 1
+        c += 1
+        intervals.append(start + c * h)
+        # y, x = np_histogram(p[1], bins=intervals)
+        sc.axes.hist(plot, bins=intervals)
+        self.base_layout.addWidget(sc)
+
+        self.show()

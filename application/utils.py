@@ -1,11 +1,12 @@
 import os
 import statistics
+import threading
 
 import numpy
 from PyQt5.QtWidgets import QFileDialog, QCheckBox, QAction
+from scipy.stats import skew, kurtosis
 
 import plot_modelling
-
 from dialogs import AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp, BalanceEnvelope, TonalEnvelope, \
     LinearFrequencyModulation, AdditionDialog, MultiplicationDialog, StatisticDialog
 from dialogs import ExpEnvelope
@@ -13,8 +14,6 @@ from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog, Wh
     WhiteNoiseNormalisedDialog
 from dialogs import open_warning_messagebox
 from views.information_dialog import InformationDialog
-
-from scipy.stats import skew, kurtosis
 
 
 def open_file_dialog(mainwindow):
@@ -70,14 +69,15 @@ def add_data_to_plots(window, plots, **kwargs):
 
 def show_statistics_for_current(mw):
     plot = mw.sender().plot[1]
-    StatisticDialog(
+    threading.Thread(target=lambda: StatisticDialog(
         standard_deviation=numpy.std(plot),
         average=statistics.mean(plot), dispersion=statistics.variance(plot),
         coef_of_variation=statistics.pvariance(plot),
         skewness=skew(plot), excess_kurtosis=kurtosis(plot), minimal_value=min(plot),
         maximum_value=max(plot), quantile_005=numpy.quantile(plot, 0.05), quantile_095=numpy.quantile(plot, 0.95),
-        median=statistics.median(plot)
-    ).exec()
+        median=statistics.median(plot),
+        plot=plot
+    ).exec()).run()
 
 
 def show_signal_information(**info):

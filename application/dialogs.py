@@ -1,6 +1,9 @@
+import threading
+
 from PyQt5 import uic
 from PyQt5.QtWidgets import QDialog, QMessageBox, QHeaderView, QTableWidgetItem
 
+import stats
 from application import consts
 from application.consts import *
 from application.consts import DELAYED_SINGLE_LEAP_PATH, DECREASING_EXP_PATH
@@ -401,6 +404,7 @@ class StatisticDialog(QDialog):
                  quantile_005=None,
                  quantile_095=None,
                  median=None,
+                 plot=None
                  ):
         super(QDialog, self).__init__()
         uic.loadUi(STATISTICS_PATH, self)
@@ -415,6 +419,7 @@ class StatisticDialog(QDialog):
         self.quantile_005 = quantile_005
         self.quantile_095 = quantile_095
         self.median = median
+        self.plot = plot
         self.setupUi()
 
     def setupUi(self):
@@ -445,6 +450,10 @@ class StatisticDialog(QDialog):
                 self.table.setItem(cnt, 0, QTableWidgetItem(str(name)))
                 self.table.setItem(cnt, 1, QTableWidgetItem(str(value)))
             cnt += 1
+        threading.Thread(target=lambda: stats.HistoWidget(plot=self.plot).exec()).run()
+
+
+
 
 
 class BaseOperationDialog(QDialog):
