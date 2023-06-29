@@ -5,7 +5,7 @@ INFORMATION_PATH = 'ui/information.ui'
 FRAGMENT_PATH = 'ui/fragment.ui'
 
 SAW_NAME = 'Пила'
-SAW_PATH = 'ui/saw_dialod.ui'
+SAW_PATH = 'ui/saw_dialog.ui'
 
 SINUSOID_NAME = 'Дискретизированная синусоида'
 SINUSOID_PATH = 'ui/sinusoid_dialog.ui'
@@ -26,6 +26,12 @@ WHITE_NOISE_NORMAL_LAW_PATH = ''
 
 RANDOM_AUTOREGRESSIVE_SIGNAL_NAME = 'Случайного сигнал авторегрессии-скользящего среднего порядка'
 RANDOM_AUTOREGRESSIVE_SIGNAL_PATH = ''
+
+ADDITION_CHANNELS_NAME = 'Сложение сигналов'
+ADDITION_CHANNELS_PATH = ''
+
+MULTIPLICATION_CHANNELS_NAME = 'Умножение сигналов'
+MULTIPLICATION_CHANNELS_PATH = ''
 
 MODELING_PATH = 'ui/Modeling.ui'
 MODELING_TITLE = 'Моделирование'
