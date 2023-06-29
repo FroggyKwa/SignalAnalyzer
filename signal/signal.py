@@ -10,6 +10,7 @@ class Signal:
         self.n_channels = n_channels
         self.n_signals = n_signals
         self.frequency = frequency
+        self.plots = {}
         self.channels = None
         self.start_datetime = None
         self.names = None
@@ -39,9 +40,7 @@ class Signal:
                                                              '%d-%m-%Y %H:%M:%S.%f')
             next(file)
             self.names = file.readline().strip().split(';')
-
             self.channels = [[] for _ in range(self.n_channels)]
-
             self.duration = self.n_signals / self.frequency
 
             for line in file:
@@ -49,8 +48,8 @@ class Signal:
                     self.channels[index % len(self.channels)].append(float(data))
 
             times = np.linspace(0, self.n_signals / self.frequency, num=self.n_signals)
-            plots = {
+            self.plots = {
                 self.names[i]: (times, self.channels[i])
                 for i in range(len(self.channels))
             }
-            return plots
+            return self.plots

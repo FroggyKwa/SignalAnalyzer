@@ -5,7 +5,8 @@ from PyQt5.QtWidgets import QFileDialog, QCheckBox
 import plot_modelling
 from dialogs import AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp, BalanceEnvelope
 from dialogs import ExpEnvelope
-from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog, WhiteNoiseDialog, WhiteNoiseNormalisedDialog
+from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog, WhiteNoiseDialog, \
+    WhiteNoiseNormalisedDialog
 from dialogs import open_warning_messagebox
 from views.information_dialog import InformationDialog
 
@@ -89,10 +90,12 @@ def open_white_noise_normalised_dialog(parent=None):
 def model_plot(window, plot_type=None, **kwargs):
     try:
         duration = window.signal.duration if window.signal.duration is not None else 60
+        data = {plot_modelling.generate_name(window.signal, plot_type.name): plot_modelling.model_plot(
+            plot_type=plot_type, duration=duration, **kwargs)}
+        window.signal.plots |= data
         add_data_to_plots(
             window,
-            {plot_modelling.generate_name(window.signal, plot_type.name): plot_modelling.model_plot(
-                plot_type=plot_type, duration=duration, **kwargs)},
+            data,
             frequency=kwargs.get('frequency'))
     except ValueError:
         open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
@@ -124,3 +127,35 @@ def sum_plots(p1, p2):
 
 def multiple_plots(p1, p2):
     return p1[0], [p1[1][i] * p2[1][i] for i in range(len(p1[1]))]
+
+
+def save_as(filename, signal):
+    header = list()
+    try:
+        header.append('# channels number')
+        header.append(len(signal.plots))
+        header.append('# samples number')
+        header.append(signal.n_signals)
+        header.append('# sampling rate')
+        header.append(signal.frequency)
+        header.append('# start date')
+        header.append(signal.start_datetime.strftime("%d-%m-%Y"))
+        header.append('# start time')
+        header.append(signal.start_datetime.strftime("%H:%M:%S.%f"))
+        header.append('# channels names')
+        header.append(';'.join(list(signal.plots.keys())))
+        header = map(str, header)
+        data = [[] for _ in range(signal.n_signals)]
+        for i in range(signal.n_signals):
+            for j in range(len(signal.plots)):
+                data[i].append(list(signal.plots.values())[j][1][i])
+            # data[i % len(data)].append(values[i])
+    except AttributeError:
+        open_warning_messagebox('Ошибка!', 'Что-то пошло не так при сохранении!')
+        return
+
+    with open(filename, 'w') as file:
+        file.writelines(map(lambda x: x + '\n', header))
+        for line in data:
+            file.writelines(map(lambda x: x+ ' ', map(str, line)))
+            file.write('\n')

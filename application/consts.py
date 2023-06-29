@@ -51,6 +51,8 @@ DECREASING_EXP_PATH = 'ui/DiscretizedDecreasingExponent.ui'
 
 OPEN_ACTION_TEXT = 'Открыть'
 
+SAVE_FILE_ACTION_TEXT = 'Сохранить как'
+
 SIGNAL_INFORMATION_ACTION_TEXT = 'Информация о сигнале'
 
 SIGNAL_FRAGMENT_ACTION_TEXT = 'Фрагмент'
