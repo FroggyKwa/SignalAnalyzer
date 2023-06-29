@@ -5,7 +5,7 @@ import pyqtgraph as pg
 from PyQt5.QtWidgets import QMenu
 from pyqtgraph import PlotWidget, InfiniteLine
 
-from consts import SIGNAL_FRAGMENT_ACTION_TEXT, STATISTICS_ACTION_TEXT
+from consts import *
 from dialogs import open_warning_messagebox
 from utils import show_fragment_dialog, show_statistics_for_current
 
@@ -25,10 +25,13 @@ class MyPlotWidget(PlotWidget):
     def contextMenuEvent(self, event):
         contextMenu = QMenu(self)
         fragment_action = contextMenu.addAction(SIGNAL_FRAGMENT_ACTION_TEXT)
+        fourier_action = contextMenu.addAction(SIGNAL_FOURIER_ACTION_TEXT)
         stats_action = contextMenu.addAction(STATISTICS_ACTION_TEXT)
         action = contextMenu.exec_(self.mapToGlobal(event.pos()))
         if action == fragment_action:
             show_fragment_dialog(self)
+        if action == fourier_action:
+            pass
         elif action == stats_action:
             show_statistics_for_current(plot=self.plot_data)
 

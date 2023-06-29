@@ -78,4 +78,6 @@ LINEAR_FREQUENCY_MODULATION_NAME = 'Сигнал с линейной часто�
 
 STATISTICS_PATH = 'ui/Statistics.ui'
 
+SIGNAL_FOURIER_ACTION_TEXT = 'Дискретное преобразование Фурье'
+
 HISTOGRAM_PATH = 'ui/histogram.ui'
