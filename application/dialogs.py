@@ -302,10 +302,12 @@ class LinearFrequencyModulation(QDialog):
                         fo=float(self.fo.toPlainText()),
                         fk=float(self.fk.toPlainText()),
                         fi=float(self.fi.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
 
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
+
 
 
 class WhiteNoiseDialog(QDialog):
@@ -330,10 +332,12 @@ class WhiteNoiseDialog(QDialog):
             data = dict(a=float(self.a.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()),
                         b=float(self.b.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
 
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
+
 
 
 class WhiteNoiseNormalisedDialog(QDialog):
@@ -358,10 +362,12 @@ class WhiteNoiseNormalisedDialog(QDialog):
             data = dict(a=float(self.a.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()),
                         sigma=float(self.sigma.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
 
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
+
 
 
 class FragmentDialog(QDialog):
