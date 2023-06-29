@@ -1,8 +1,8 @@
 import os
 
-from PyQt5.QtWidgets import QFileDialog, QMessageBox, QCheckBox
+from PyQt5.QtWidgets import QFileDialog, QCheckBox
 
-from dialogs import FragmentDialog
+from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse
 from views.information_dialog import InformationDialog
 
 
@@ -28,8 +28,6 @@ def show_fragment_dialog(plot_widget):
     fragment_dialog.exec()
 
 
-
-
 class MyCheckBox(QCheckBox):
     def __init__(self, name, plot, checked=True):
         super().__init__(name, checked=checked)
@@ -40,3 +38,11 @@ class MyCheckBox(QCheckBox):
             self.plot.show()
         else:
             self.plot.hide()
+
+
+def open_about_us_dialog():
+    AboutDialog().exec()
+
+
+def open_delayed_single_impulse_dialog():
+    DelayedSingleImpulse().exec()

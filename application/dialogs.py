@@ -2,7 +2,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QDialog, QMessageBox
 
 from application import consts
-from application.consts import ABOUT_PATH, FRAGMENT_PATH
+from application.consts import ABOUT_PATH, FRAGMENT_PATH, DELAYED_SINGLE_IMPULSE
 
 
 class AboutDialog(QDialog):
@@ -42,6 +42,21 @@ class FragmentDialog(QDialog):
 
     def end_button_handler(self):
         self.stop.setPlainText(str(self.plot_widget.plot_data[0][-1]))
+
+
+class DelayedSingleImpulse(QDialog):
+    def __init__(self):
+        super(QDialog, self).__init__()
+        uic.loadUi(DELAYED_SINGLE_IMPULSE, self)
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.setFixedSize(349, 190)
+        self.build_plot_button.clicked.connect(self.btn_clicked)
+
+    def btn_clicked(self):
+        pass
 
 
 def open_warning_messagebox(title, text):
