@@ -3,7 +3,8 @@ import os
 from PyQt5.QtWidgets import QFileDialog, QCheckBox
 
 import plot_modelling
-from dialogs import AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp, BalanceEnvelope
+from dialogs import AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp, BalanceEnvelope, TonalEnvelope, \
+    LinearFrequencyModulation
 from dialogs import ExpEnvelope
 from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog, WhiteNoiseDialog, \
     WhiteNoiseNormalisedDialog
@@ -126,7 +127,11 @@ def open_balance_envelope_dialog(parent=None):
 
 
 def open_tonal_envelope_dialog(parent=None):
-    Tonal(parent=parent).exec()
+    TonalEnvelope(parent=parent).exec()
+
+
+def linear_frequency_modulation_dialog(parent=None):
+    LinearFrequencyModulation(parent=parent).exec()
 
 
 def open_saw_dialog(parent=None):

@@ -267,6 +267,36 @@ class TonalEnvelope(QDialog):
         model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
+class LinearFrequencyModulation(QDialog):
+    def __init__(self, parent=None):
+        super(QDialog, self).__init__(parent=parent)
+        uic.loadUi(LINEAR_FREQUENCY_MODULATION_PATH, self)
+        self.setWindowTitle(consts.LINEAR_FREQUENCY_MODULATION_NAME)
+        self.plot_type = PlotType.linear_frequency_modulation
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.setFixedSize(self.width(), self.height())
+        self.build_plot_button.clicked.connect(self.btn_clicked)
+        if self.parent().signal.frequency:
+            self.frequency_text_edit.setPlainText(str(self.parent().signal.frequency))
+
+    def btn_clicked(self):
+        data = {}
+        from utils import model_plot
+        try:
+            data = dict(a=float(self.a.toPlainText()),
+                        frequency=float(self.frequency_text_edit.toPlainText()),
+                        fo=float(self.fo.toPlainText()),
+                        fk=float(self.fk.toPlainText()),
+                        fi=float(self.fi.toPlainText()))
+
+        except ValueError:
+            open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
+
+
 class WhiteNoiseDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
