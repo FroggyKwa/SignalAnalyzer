@@ -5,8 +5,13 @@ INFORMATION_PATH = 'ui/information.ui'
 FRAGMENT_PATH = 'ui/fragment.ui'
 
 SAW_NAME = 'Пила'
+SAW_PATH = 'ui/saw_dialod.ui'
+
 SINUSOID_NAME = 'Дискретизированная синусоида'
+SINUSOID_PATH = 'ui/sinusoid_dialog.ui'
+
 MEANDER_NAME = 'Меандр'
+MEANDER_PATH = 'ui/meander_dialog.ui'
 
 
 MODELING_PATH = 'ui/Modeling.ui'

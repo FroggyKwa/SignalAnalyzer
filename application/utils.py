@@ -2,7 +2,7 @@ import os
 
 from PyQt5.QtWidgets import QFileDialog, QMessageBox, QCheckBox
 
-from dialogs import FragmentDialog
+from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog
 from views.information_dialog import InformationDialog
 
 
@@ -28,8 +28,6 @@ def show_fragment_dialog(plot_widget):
     fragment_dialog.exec()
 
 
-
-
 class MyCheckBox(QCheckBox):
     def __init__(self, name, plot, checked=True):
         super().__init__(name, checked=checked)
@@ -40,3 +38,12 @@ class MyCheckBox(QCheckBox):
             self.plot.show()
         else:
             self.plot.hide()
+
+def open_sinusoid_dialog():
+    SinusoidDialog().exec()
+
+def open_saw_dialog():
+    SawDialog().exec()
+
+def open_meander_dialog():
+    MeanderDialog().exec()

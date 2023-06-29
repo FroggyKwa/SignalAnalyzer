@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMainWindow, QAction
 from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
     ERROR_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME
 from application.dialogs import open_warning_messagebox, AboutDialog
-from application.utils import open_file_dialog, show_signal_information
+from application.utils import open_file_dialog, show_signal_information, open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
 from plot_widget import MyPlotWidget
 from signal.signal import Signal
 from utils import MyCheckBox
@@ -31,12 +31,17 @@ class MainWindow(QMainWindow):
         self.open_file_action.triggered.connect(
             lambda: self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
 
-        self.open_sinusoid = QAction(SINUSOID_NAME, self)
-        self.open_meander = QAction(MEANDER_NAME, self)
-        self.saw = QAction(SAW_NAME, self)
-        self.menu_2.addAction(self.open_sinusoid)
-        self.menu_2.addAction(self.open_meander)
-        self.menu_2.addAction(self.saw)
+        self.sinusoid_action = QAction(SINUSOID_NAME, self)
+        self.meander_action = QAction(MEANDER_NAME, self)
+        self.saw_action = QAction(SAW_NAME, self)
+        self.menu_2.addAction(self.meander_action)
+        self.menu_2.addAction(self.sinusoid_action)
+        self.menu_2.addAction(self.saw_action)
+
+        self.sinusoid_action.triggered.connect(open_sinusoid_dialog)
+        self.meander_action.triggered.connect(open_meander_dialog)
+        self.saw_action.triggered.connect(open_saw_dialog)
+
 
         # Analyzing menu action
 

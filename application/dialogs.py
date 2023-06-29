@@ -2,7 +2,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QDialog, QMessageBox
 
 from application import consts
-from application.consts import ABOUT_PATH, FRAGMENT_PATH
+from application.consts import ABOUT_PATH, FRAGMENT_PATH, SINUSOID_PATH, MEANDER_PATH, SAW_PATH
 
 
 class AboutDialog(QDialog):
@@ -16,6 +16,42 @@ class AboutDialog(QDialog):
     def setupUi(self):
         self.confirm.clicked.connect(self.close)
 
+
+
+class SinusoidDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi(SINUSOID_PATH, self)
+        self.setWindowTitle(consts.SINUSOID_NAME)
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.pushButton.clicked.connect(self.close)
+
+
+class SawDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi(SAW_PATH, self)
+        self.setWindowTitle(consts.SAW_NAME)
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.pushButton.clicked.connect(self.close)
+
+
+class MeanderDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi(MEANDER_PATH, self)
+        self.setWindowTitle(consts.MEANDER_NAME)
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.pushButton.clicked.connect(self.close)
 
 class FragmentDialog(QDialog):
     def __init__(self, plot_widget=None):
@@ -42,6 +78,7 @@ class FragmentDialog(QDialog):
 
     def end_button_handler(self):
         self.stop.setPlainText(str(self.plot_widget.plot_data[0][-1]))
+
 
 
 def open_warning_messagebox(title, text):
