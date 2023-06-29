@@ -62,3 +62,4 @@ EXP_ENVELOPE_PATH = 'ui/ExpEnvelope.ui'
 
 EXP_ENVELOPE_NAME = 'Сигнал с экспоненциальной огибающей - амплитудная модуляция'
 BALANCE_ENVELOPE_PATH = 'ui/BalanceEnvelope.ui'
+

@@ -178,15 +178,33 @@ class DecreasingExp(QDialog):
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
         model_plot(self.parent(), plot_type=self.plot_type.name, **data)
 
+
 class ExpEnvelope(QDialog):
     def __init__(self, parent=None):
         super(QDialog, self).__init__(parent=parent)
         uic.loadUi(EXP_ENVELOPE_PATH, self)
+        self.plot_type = PlotType.exp_envelope
         self.setupUi()
         self.show()
 
     def setupUi(self):
-        self.OkButton.clicked.connect(self.close)
+        self.setFixedSize(349, 190)
+        self.build_plot_button.clicked.connect(self.btn_clicked)
+        if self.parent().signal.frequency:
+            self.frequency_text_edit.setPlainText(str(self.parent().signal.frequency))
+
+    def btn_clicked(self):
+        from utils import model_plot
+        try:
+            data = dict(a=float(self.a.toPlainText()),
+                        frequency=float(self.frequency_text_edit.toPlainText()),
+                        t=float(self.t.toPlainText()),
+                        fn=float(self.fn.toPlainText()),
+                        fi=float(self.fi.toPlainText()))
+
+        except ValueError:
+            open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
+        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
 
 
 class BalanceEnvelope(QDialog):
@@ -198,7 +216,7 @@ class BalanceEnvelope(QDialog):
         self.show()
 
     def setupUi(self):
-        self.OkButton.clicked.connect(self.btn_clicked)
+        self.build_plot_button.clicked.connect(self.btn_clicked)
 
 
 class FragmentDialog(QDialog):
