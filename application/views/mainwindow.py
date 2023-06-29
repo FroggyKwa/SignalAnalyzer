@@ -6,7 +6,8 @@ from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMA
     DECREASING_EXP
 from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
-    open_delayed_single_impulse_dialog, add_data_to_plots
+    open_delayed_single_impulse_dialog, open_exp_envelope_dialog, open_balance_envelope_dialog, add_data_to_plots
+
 from application.utils import open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
 from signal.signal import Signal
 
@@ -22,7 +23,6 @@ class MainWindow(QMainWindow):
         self.show()
 
     def setupUi(self):
-        self.action_list = []
         # About us menu trigger
         self.menu_6.aboutToShow.connect(open_about_us_dialog)
 
@@ -61,6 +61,10 @@ class MainWindow(QMainWindow):
         self.menu_2.addAction(self.open_sinusoid)
         self.menu_2.addAction(self.open_meander)
         self.menu_2.addAction(self.saw)
+
+        self.exp_envelope_action.triggered.connect(open_exp_envelope_dialog)
+        self.balance_envelope_action.triggered.connect(open_balance_envelope_dialog)
+
 
         # Analyzing menu action
 

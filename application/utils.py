@@ -2,6 +2,7 @@ import os
 
 from PyQt5.QtWidgets import QFileDialog, QCheckBox
 
+from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse, ExpEnvelope
 import plot_modelling
 from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse, open_warning_messagebox
 from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse
@@ -33,7 +34,6 @@ def add_data_to_plots(window, plots, **kwargs):
         checkbox = MyCheckBox(name, window.plots[-1], checked=True)
         checkbox.stateChanged.connect(checkbox.change_visible)
         window.name_plot_layout.addWidget(checkbox)
-        window.action_list.append((window.plots, checkbox))
         window.plots[-1].plot(*plot, pen='b')
         window.plots[-1].setMouseEnabled(x=True, y=False)
         window.plots[-1].setLabel(axis='bottom', text=name)
@@ -83,6 +83,14 @@ def model_plot(window, plot_type=None, **kwargs):
 
 def open_sinusoid_dialog():
     SinusoidDialog().exec()
+
+
+def open_exp_envelope_dialog():
+    ExpEnvelope().exec()
+
+
+def open_balance_envelope_dialog():
+    ExpEnvelope().exec()
 
 def open_saw_dialog():
     SawDialog().exec()
