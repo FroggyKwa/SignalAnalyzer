@@ -6,10 +6,8 @@ from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMA
     DECREASING_EXP
 from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
-    open_delayed_single_impulse_dialog
-from plot_widget import MyPlotWidget
+    open_delayed_single_impulse_dialog, add_data_to_plots
 from signal.signal import Signal
-from utils import MyCheckBox
 
 
 class MainWindow(QMainWindow):
@@ -34,7 +32,9 @@ class MainWindow(QMainWindow):
             lambda: self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
 
         self.delayed_single_impulse_action = QAction(DELAYED_SINGLE_IMPULSE_NAME, self)
-        self.delayed_single_impulse_action.triggered.connect(open_delayed_single_impulse_dialog)
+        self.delayed_single_impulse_action.triggered.connect(
+            lambda: open_delayed_single_impulse_dialog(self)
+        )
         self.delayed_single_leap_action = QAction(DELAYED_SINGLE_LEAP_NAME, self)
         self.dicreasing_exp = QAction(DECREASING_EXP, self)
 
@@ -63,23 +63,10 @@ class MainWindow(QMainWindow):
 
     def setup_signal_from_file(self, filename):
         try:
-            self.add_data_to_plots(self.signal.load_file(filename))
+            add_data_to_plots(self, self.signal.load_file(filename))
         except ValueError:
             open_warning_messagebox(title=ERROR_TITLE,
                                     text=ERROR_TEXT)
-
-    def add_data_to_plots(self, plots):
-        for name, plot in plots.items():
-            self.plots.append(MyPlotWidget(self, plot_data=plot, frequency=self.signal.frequency))
-            self.graphs_layout.addWidget(self.plots[-1])
-            checkbox = MyCheckBox(name, self.plots[-1], checked=True)
-            checkbox.stateChanged.connect(checkbox.change_visible)
-            self.name_plot_layout.addWidget(checkbox)
-            self.action_list.append((self.plots, checkbox))
-            self.plots[-1].plot(*plot, pen='b')
-            self.plots[-1].setMouseEnabled(x=True, y=False)
-            self.plots[-1].setLabel(axis='bottom', text=name)
-            self.plots[-1].setFixedSize(self.size().width() - 50, (self.size().height() - 70) // len(plots) - 10)
 
     def resizeEvent(self, event):
         for plot in self.plots:

@@ -2,7 +2,8 @@ import os
 
 from PyQt5.QtWidgets import QFileDialog, QCheckBox
 
-from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse
+import plot_modelling
+from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse, open_warning_messagebox
 from views.information_dialog import InformationDialog
 
 
@@ -16,6 +17,21 @@ def open_file_dialog(mainwindow):
                                               options=options)
     if filename:
         mainwindow.setup_signal_from_file(filename)
+
+
+def add_data_to_plots(window, plots):
+    from plot_widget import MyPlotWidget
+    for name, plot in plots.items():
+        window.plots.append(MyPlotWidget(window, plot_data=plot, frequency=window.signal.frequency))
+        window.graphs_layout.addWidget(window.plots[-1])
+        checkbox = MyCheckBox(name, window.plots[-1], checked=True)
+        checkbox.stateChanged.connect(checkbox.change_visible)
+        window.name_plot_layout.addWidget(checkbox)
+        window.action_list.append((window.plots, checkbox))
+        window.plots[-1].plot(*plot, pen='b')
+        window.plots[-1].setMouseEnabled(x=True, y=False)
+        window.plots[-1].setLabel(axis='bottom', text=name)
+        window.plots[-1].setFixedSize(window.size().width() - 50, (window.size().height() - 70) // len(plots) - 10)
 
 
 def show_signal_information(**info):
@@ -44,5 +60,14 @@ def open_about_us_dialog():
     AboutDialog().exec()
 
 
-def open_delayed_single_impulse_dialog():
-    DelayedSingleImpulse().exec()
+def open_delayed_single_impulse_dialog(parent=None):
+    DelayedSingleImpulse(parent=parent).exec()
+
+
+def model_plot(window, plot_type=None, **kwargs):
+    try:
+        add_data_to_plots(
+            window, {plot_modelling.generate_name(window.signal, plot_type): plot_modelling.model_plot(
+                plot_type=plot_modelling.PlotType.delayed_single_impulse, **kwargs)})
+    except ValueError:
+        open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')

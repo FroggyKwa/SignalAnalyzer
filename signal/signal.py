@@ -1,7 +1,7 @@
 import datetime
 
-import matplotlib.pyplot as plt
 import numpy as np
+from plot_modelling import PlotType
 
 
 class Signal:
@@ -13,6 +13,7 @@ class Signal:
         self.channels = None
         self.start_datetime = None
         self.names = None
+        self.models = {data.name: 0 for data in PlotType}
 
     def load_file(self, filename):
         """
