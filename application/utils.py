@@ -23,6 +23,18 @@ def open_file_dialog(mainwindow):
         mainwindow.setup_signal_from_file(filename)
 
 
+def save_file_dialog(mainwindow):
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    filename, _ = QFileDialog.getSaveFileName(mainwindow,
+                                              caption="Сохранить файл",
+                                              filter="Text files (*.txt);;All Files (*)",
+                                              directory=os.getcwd(),
+                                              options=options)
+    if filename:
+        return filename
+
+
 def add_data_to_plots(window, plots, **kwargs):
     from plot_widget import MyPlotWidget
     for name, plot in plots.items():
@@ -157,5 +169,5 @@ def save_as(filename, signal):
     with open(filename, 'w') as file:
         file.writelines(map(lambda x: x + '\n', header))
         for line in data:
-            file.writelines(map(lambda x: x+ ' ', map(str, line)))
+            file.writelines(map(lambda x: x + ' ', map(str, line)))
             file.write('\n')

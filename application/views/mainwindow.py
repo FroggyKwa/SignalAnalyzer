@@ -7,7 +7,7 @@ from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
     open_delayed_single_impulse_dialog, add_data_to_plots, open_delayed_single_leap_dialog, open_decreasing_exp_dialog, \
     open_exp_envelope_dialog, open_balance_envelope_dialog, open_white_noise_dialog, open_white_noise_normalised_dialog, \
-    save_as
+    save_as, save_file_dialog
 
 from application.utils import open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
 from signal.signal import Signal
@@ -35,7 +35,7 @@ class MainWindow(QMainWindow):
 
         # Save file menu action
         self.save_file_action = QAction(SAVE_FILE_ACTION_TEXT, self)
-        self.save_file_action.triggered.connect(lambda: save_as('save.txt', self.signal))
+        self.save_file_action.triggered.connect(lambda: save_as(save_file_dialog(self), self.signal))
         self.menu.addAction(self.save_file_action)
 
         self.sinusoid_action = QAction(SINUSOID_NAME, self)
