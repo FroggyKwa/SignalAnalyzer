@@ -64,4 +64,7 @@ EXP_ENVELOPE_NAME = 'Сигнал с экспоненциальной огиба
 BALANCE_ENVELOPE_PATH = 'ui/BalanceEnvelope.ui'
 BALANCE_ENVELOPE_NAME = 'Cигнал с балансной огибающей - амплитудная модуляция'
 
+TONAL_ENVELOPE_PATH = 'ui/TonalEnvelope.ui'
+TONAL_ENVELOPE_NAME = 'Cигнал с тональной огибающей. - амплитудная модуляция'
+
 

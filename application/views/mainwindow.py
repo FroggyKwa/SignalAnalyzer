@@ -8,7 +8,6 @@ from application.utils import open_file_dialog, show_signal_information, open_ab
     open_delayed_single_impulse_dialog, add_data_to_plots, open_delayed_single_leap_dialog, open_decreasing_exp_dialog, \
     open_exp_envelope_dialog, open_balance_envelope_dialog, open_white_noise_dialog, open_white_noise_normalised_dialog
 
-
 from application.utils import open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
 from signal.signal import Signal
 
@@ -31,12 +30,12 @@ class MainWindow(QMainWindow):
         self.open_file_action = QAction(OPEN_ACTION_TEXT, self)
         self.menu.addAction(self.open_file_action)
         self.open_file_action.triggered.connect(
-            lambda: self.clear_layout(layout=self.name_plot_layout) and self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
+            lambda: self.clear_layout(layout=self.name_plot_layout) and self.clear_layout(
+                layout=self.graphs_layout) and open_file_dialog(self))
 
         self.sinusoid_action = QAction(SINUSOID_NAME, self)
         self.meander_action = QAction(MEANDER_NAME, self)
         self.saw_action = QAction(SAW_NAME, self)
-
 
         self.sinusoid_action.triggered.connect(lambda: open_sinusoid_dialog(self))
         self.meander_action.triggered.connect(lambda: open_meander_dialog(self))
@@ -55,8 +54,13 @@ class MainWindow(QMainWindow):
         self.open_meander = QAction(MEANDER_NAME, self)
         self.saw = QAction(SAW_NAME, self)
 
+        self.menu_2.addAction(self.delayed_single_impulse_action)
+        self.menu_2.addAction(self.delayed_single_leap_action)
+        self.menu_2.addAction(self.decreasing_exp)
+
         self.exp_envelope_action.triggered.connect(lambda: open_exp_envelope_dialog(self))
         self.balance_envelope_action.triggered.connect(lambda: open_balance_envelope_dialog(self))
+
 
         self.white_noise_action = QAction(WHITE_NOISE_INTERVAL_NAME, self)
         self.white_noise_action.triggered.connect(lambda: open_white_noise_dialog(self))

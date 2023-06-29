@@ -2,9 +2,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QDialog, QMessageBox
 
 from application import consts
-from application.consts import ABOUT_PATH, FRAGMENT_PATH, EXP_ENVELOPE_PATH, BALANCE_ENVELOPE_PATH, \
-    DELAYED_SINGLE_IMPULSE_PATH, WHITE_NOISE_INTERVAL_NAME, WHITE_NOISE_INTERVAL_PATH, \
-    WHITE_NOISE_NORMAL_LAW_NAME, WHITE_NOISE_NORMAL_LAW_PATH
+from application.consts import *
 
 from application.consts import DELAYED_SINGLE_LEAP_PATH, DECREASING_EXP_PATH
 from application.consts import SINUSOID_PATH, MEANDER_PATH, SAW_PATH
@@ -230,9 +228,39 @@ class BalanceEnvelope(QDialog):
         try:
             data = dict(a=float(self.a.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()),
-                        t=float(self.t.toPlainText()),
+                        fo=float(self.fo.toPlainText()),
                         fn=float(self.fn.toPlainText()),
                         fi=float(self.fi.toPlainText()))
+
+        except ValueError:
+            open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
+
+
+class TonalEnvelope(QDialog):
+    def __init__(self, parent=None):
+        super(QDialog, self).__init__(parent=parent)
+        uic.loadUi(TONAL_ENVELOPE_PATH, self)
+        self.setWindowTitle(consts.TONAL_ENVELOPE_NAME)
+        self.plot_type = PlotType.tonal_envelope
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.setFixedSize(self.width(), self.height())
+        self.build_plot_button.clicked.connect(self.btn_clicked)
+        if self.parent().signal.frequency:
+            self.frequency_text_edit.setPlainText(str(self.parent().signal.frequency))
+
+    def btn_clicked(self):
+        from utils import model_plot
+        try:
+            data = dict(a=float(self.a.toPlainText()),
+                        frequency=float(self.frequency_text_edit.toPlainText()),
+                        fo=float(self.fo.toPlainText()),
+                        fn=float(self.fn.toPlainText()),
+                        fi=float(self.fi.toPlainText()),
+                        m=float(self.m.toPlainText())),
 
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')

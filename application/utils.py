@@ -110,6 +110,10 @@ def open_balance_envelope_dialog(parent=None):
     BalanceEnvelope(parent=parent).exec()
 
 
+def open_tonal_envelope_dialog(parent=None):
+    Tonal(parent=parent).exec()
+
+
 def open_saw_dialog(parent=None):
     SawDialog(parent).exec()
 
