@@ -43,7 +43,7 @@
     <string>Период</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="period_value">
+  <widget class="QTextEdit" name="l">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -89,7 +89,7 @@
     <string>До</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="start_value">
+  <widget class="QTextEdit" name="start">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -99,7 +99,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextEdit" name="end_value">
+  <widget class="QTextEdit" name="end">
    <property name="geometry">
     <rect>
      <x>270</x>
@@ -109,7 +109,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="build_plot_button">
    <property name="enabled">
     <bool>true</bool>
    </property>

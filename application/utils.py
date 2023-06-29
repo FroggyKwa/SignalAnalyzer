@@ -70,12 +70,12 @@ def open_delayed_single_impulse_dialog(parent=None):
     DelayedSingleImpulse(parent=parent).exec()
 
 
-def open_delayed_single_leap_dialog():
-    DelayedSingleLeap().exec()
+def open_delayed_single_leap_dialog(parent=None):
+    DelayedSingleLeap(parent=parent).exec()
 
 
-def open_decreasing_exp_dialog():
-    DecreasingExp().exec()
+def open_decreasing_exp_dialog(parent=None):
+    DecreasingExp(parent=parent).exec()
 
 
 def model_plot(window, plot_type=None, **kwargs):
@@ -89,9 +89,11 @@ def model_plot(window, plot_type=None, **kwargs):
     except ValueError:
         open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
 
-def open_sinusoid_dialog():
-    SinusoidDialog().exec()
+def open_sinusoid_dialog(parent=None):
+    SinusoidDialog(parent=parent).exec()
 
+def open_saw_dialog(parent=None):
+    SawDialog(parent=parent).exec()
 
 def open_exp_envelope_dialog():
     ExpEnvelope().exec()
@@ -103,5 +105,5 @@ def open_balance_envelope_dialog():
 def open_saw_dialog():
     SawDialog().exec()
 
-def open_meander_dialog():
-    MeanderDialog().exec()
+def open_meander_dialog(parent=None):
+    MeanderDialog(parent=parent).exec()
