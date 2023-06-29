@@ -59,7 +59,9 @@ ERROR_TITLE = 'Ошибка!'
 ERROR_TEXT = 'Произошла ошибка при чтении файла! \nНеверный формат!'
 
 EXP_ENVELOPE_PATH = 'ui/ExpEnvelope.ui'
-
 EXP_ENVELOPE_NAME = 'Сигнал с экспоненциальной огибающей - амплитудная модуляция'
+
 BALANCE_ENVELOPE_PATH = 'ui/BalanceEnvelope.ui'
+BALANCE_ENVELOPE_NAME = 'Cигнал с балансной огибающей - амплитудная модуляция'
+
 

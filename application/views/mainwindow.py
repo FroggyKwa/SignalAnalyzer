@@ -1,9 +1,8 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction
 
-from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
-    ERROR_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME, DELAYED_SINGLE_LEAP_NAME, DELAYED_SINGLE_IMPULSE_NAME, \
-    DECREASING_EXP_NAME, ADDITION_CHANNELS_NAME, MULTIPLICATION_CHANNELS_NAME, ADDITION_CHANNELS_NAME
+from application.consts import *
+
 from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
     open_delayed_single_impulse_dialog, add_data_to_plots, open_delayed_single_leap_dialog, open_decreasing_exp_dialog, \
@@ -32,7 +31,7 @@ class MainWindow(QMainWindow):
         self.open_file_action = QAction(OPEN_ACTION_TEXT, self)
         self.menu.addAction(self.open_file_action)
         self.open_file_action.triggered.connect(
-            lambda: self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
+            lambda: self.clear_layout(layout=self.name_plot_layout) and self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
 
         self.sinusoid_action = QAction(SINUSOID_NAME, self)
         self.meander_action = QAction(MEANDER_NAME, self)
@@ -50,9 +49,9 @@ class MainWindow(QMainWindow):
             lambda: open_delayed_single_impulse_dialog(self)
         )
         self.delayed_single_leap_action = QAction(DELAYED_SINGLE_LEAP_NAME, self)
-        self.delayed_single_leap_action.triggered.connect(open_delayed_single_leap_dialog)
+        self.delayed_single_leap_action.triggered.connect(lambda: open_delayed_single_leap_dialog(self))
         self.dicreasing_exp = QAction(DECREASING_EXP_NAME, self)
-        self.dicreasing_exp.triggered.connect(open_decreasing_exp_dialog)
+        self.dicreasing_exp.triggered.connect(lambda: open_decreasing_exp_dialog(self))
 
         self.open_sinusoid = QAction(SINUSOID_NAME, self)
         self.open_meander = QAction(MEANDER_NAME, self)
@@ -63,8 +62,8 @@ class MainWindow(QMainWindow):
         self.menu_2.addAction(self.dicreasing_exp)
 
 
-        self.exp_envelope_action.triggered.connect(open_exp_envelope_dialog)
-        self.balance_envelope_action.triggered.connect(open_balance_envelope_dialog)
+        self.exp_envelope_action.triggered.connect(lambda: open_exp_envelope_dialog(self))
+        self.balance_envelope_action.triggered.connect(lambda: open_balance_envelope_dialog(self))
 
 
         # Analyzing menu action

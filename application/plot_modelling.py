@@ -20,13 +20,14 @@ class PlotType(Enum):
     white_noise_normalised = 12
     autoregressive = 13
 
-def model_plot(plottype: PlotType, duration: int = 60, frequency: float = 1, n0: int = 0, a: float = 1,
-               fi: float = 0, L: float = 1, t: float = 1,
+
+def model_plot(plot_type: PlotType, duration: int = 60, frequency: float = 1, n0: int = 0, a: float | int = 1,
+               fi: float = 0, l: float = 1, t: float = 1,
                fn: float = 0, fo: float = 0, m: float = 0, fk: float = 0, w: float = 0, b: int = 10,
                sigma: float = 1):
     n = int(duration * frequency)
     times = np.linspace(0, duration, num=n)
-    match plottype:
+    match plot_type:
         case PlotType.delayed_single_impulse:
             return times, [1 if i == n0 else 0 for i in range(n)]
         case PlotType.delayed_single_leap:
@@ -36,9 +37,9 @@ def model_plot(plottype: PlotType, duration: int = 60, frequency: float = 1, n0:
         case PlotType.sinusoid:
             return times, [a * sin(radians(i * w + fi)) for i in range(n)]
         case PlotType.meander:
-            return times, [1 if i % L < L/2 else -1 for i in range(n)]
+            return times, [1 if i % l < l / 2 else -1 for i in range(n)]
         case PlotType.saw:
-            return times, [(i % L) / L for i in range(n)]
+            return times, [(i % l) / l for i in range(n)]
         case PlotType.exp_envelope:
             return times, [a * exp(-times[i] / t) * cos(radians(2 * pi * fn * times[i] + fi)) for i in range(n)]
         case PlotType.balance_envelope:
@@ -49,12 +50,12 @@ def model_plot(plottype: PlotType, duration: int = 60, frequency: float = 1, n0:
                 a * (1 + m * cos(radians(2 * pi * fo * times[i]))) * cos(radians(2 * pi * fn * times[i] + fi)) for i in
                 range(n)]
         case PlotType.linear_frequency_modulation:
-            return times, [a * cos(radians(2 * pi * (fo + (fk - fo) * times[i] / duration) * times[i] + fi)) for i in range(n)]
+            return times, [a * cos(radians(2 * pi * (fo + (fk - fo) * times[i] / duration) * times[i] + fi)) for i in
+                           range(n)]
         case PlotType.white_noise:
             return times, [randint(a, b) + randint(0, 999) / 1000 for i in range(n)]
         case PlotType.white_noise_normalised:
             return times, [normalvariate(a, sigma) for i in range(n)]
-
 
 
 def generate_name(signal, plot_model_name: None | str):

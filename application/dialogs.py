@@ -45,7 +45,7 @@ class DelayedSingleImpulse(QDialog):
                         )
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class SinusoidDialog(QDialog):
@@ -72,7 +72,7 @@ class SinusoidDialog(QDialog):
                         w=float(self.w.toPlainText()))
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class SawDialog(QDialog):
@@ -98,7 +98,7 @@ class SawDialog(QDialog):
                         frequency=float(self.frequency_text_edit.toPlainText()))
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class MeanderDialog(QDialog):
@@ -124,7 +124,7 @@ class MeanderDialog(QDialog):
                         frequency=float(self.frequency_text_edit.toPlainText()))
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class DelayedSingleLeap(QDialog):
@@ -146,11 +146,11 @@ class DelayedSingleLeap(QDialog):
         data = {}
         from utils import model_plot
         try:
-            data = dict(n=int(self.n_0.toPlainText()),
+            data = dict(n0=int(self.n_0.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()))
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class DecreasingExp(QDialog):
@@ -172,23 +172,24 @@ class DecreasingExp(QDialog):
         data = {}
         from utils import model_plot
         try:
-            data = dict(a=int(self.a.toPlainText()),
+            data = dict(a=float(self.a.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()))
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class ExpEnvelope(QDialog):
     def __init__(self, parent=None):
         super(QDialog, self).__init__(parent=parent)
         uic.loadUi(EXP_ENVELOPE_PATH, self)
+        self.setWindowTitle(consts.EXP_ENVELOPE_NAME)
         self.plot_type = PlotType.exp_envelope
         self.setupUi()
         self.show()
 
     def setupUi(self):
-        self.setFixedSize(349, 190)
+        self.setFixedSize(self.width(), self.height())
         self.build_plot_button.clicked.connect(self.btn_clicked)
         if self.parent().signal.frequency:
             self.frequency_text_edit.setPlainText(str(self.parent().signal.frequency))
@@ -204,19 +205,36 @@ class ExpEnvelope(QDialog):
 
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class BalanceEnvelope(QDialog):
     def __init__(self, parent=None):
         super(QDialog, self).__init__(parent=parent)
-        self.plot_type = PlotType.balance_envelope
         uic.loadUi(BALANCE_ENVELOPE_PATH, self)
+        self.setWindowTitle(consts.BALANCE_ENVELOPE_NAME)
+        self.plot_type = PlotType.balance_envelope
         self.setupUi()
         self.show()
 
     def setupUi(self):
+        self.setFixedSize(self.width(), self.height())
         self.build_plot_button.clicked.connect(self.btn_clicked)
+        if self.parent().signal.frequency:
+            self.frequency_text_edit.setPlainText(str(self.parent().signal.frequency))
+
+    def btn_clicked(self):
+        from utils import model_plot
+        try:
+            data = dict(a=float(self.a.toPlainText()),
+                        frequency=float(self.frequency_text_edit.toPlainText()),
+                        t=float(self.t.toPlainText()),
+                        fn=float(self.fn.toPlainText()),
+                        fi=float(self.fi.toPlainText()))
+
+        except ValueError:
+            open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class FragmentDialog(QDialog):
@@ -228,8 +246,8 @@ class FragmentDialog(QDialog):
         self.setupUi()
 
     def setupUi(self):
+        self.setFixedSize(self.width(), self.height())
         self.ok_button.clicked.connect(self.ok_button_handler)
-
         self.end_button.clicked.connect(self.end_button_handler)
 
     def ok_button_handler(self):

@@ -80,11 +80,11 @@ def open_decreasing_exp_dialog(parent=None):
 
 def model_plot(window, plot_type=None, **kwargs):
     try:
+        duration = window.signal.duration if window.signal.duration is not None else 60
         add_data_to_plots(
             window,
-            {plot_modelling.generate_name(window.signal, plot_type): plot_modelling.model_plot(
-                plot_type=plot_modelling.PlotType.delayed_single_impulse,
-                **kwargs)},
+            {plot_modelling.generate_name(window.signal, plot_type.name): plot_modelling.model_plot(
+                plot_type=plot_type, duration=duration, **kwargs)},
             frequency=kwargs.get('frequency'))
     except ValueError:
         open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')

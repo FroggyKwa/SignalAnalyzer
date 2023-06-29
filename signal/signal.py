@@ -13,6 +13,7 @@ class Signal:
         self.channels = None
         self.start_datetime = None
         self.names = None
+        self.duration = None
         self.models = {data.name: 0 for data in PlotType}
 
     def load_file(self, filename):
@@ -40,6 +41,8 @@ class Signal:
             self.names = file.readline().strip().split(';')
 
             self.channels = [[] for _ in range(self.n_channels)]
+
+            self.duration = self.n_signals / self.frequency
 
             for line in file:
                 for index, data in enumerate(line.strip().split(' ')):

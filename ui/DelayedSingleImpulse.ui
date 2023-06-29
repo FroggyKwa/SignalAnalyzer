@@ -91,7 +91,7 @@
     <string>Частота</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="build_plot_button">
    <property name="geometry">
     <rect>
      <x>120</x>
