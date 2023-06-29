@@ -299,27 +299,58 @@ class LinearFrequencyModulation(QDialog):
 
 class WhiteNoiseDialog(QDialog):
     def __init__(self, parent=None):
-        super().__init__(parent=parent)
+        super(QDialog, self).__init__(parent=parent)
         uic.loadUi(WHITE_NOISE_INTERVAL_PATH, self)
         self.setWindowTitle(consts.WHITE_NOISE_INTERVAL_NAME)
+        self.plot_type = PlotType.white_noise
         self.setupUi()
         self.show()
 
     def setupUi(self):
-        self.build_plot_button.clicked.connect(self.close)
+        self.setFixedSize(self.width(), self.height())
+        self.build_plot_button.clicked.connect(self.btn_clicked)
+        if self.parent().signal.frequency:
+            self.frequency_text_edit.setPlainText(str(self.parent().signal.frequency))
+
+    def btn_clicked(self):
+        data = {}
+        from utils import model_plot
+        try:
+            data = dict(a=float(self.a.toPlainText()),
+                        frequency=float(self.frequency_text_edit.toPlainText()),
+                        b=float(self.b.toPlainText()))
+
+        except ValueError:
+            open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class WhiteNoiseNormalisedDialog(QDialog):
     def __init__(self, parent=None):
-        super().__init__(parent=parent)
+        super(QDialog, self).__init__(parent=parent)
         uic.loadUi(WHITE_NOISE_NORMAL_LAW_PATH, self)
         self.setWindowTitle(consts.WHITE_NOISE_NORMAL_LAW_NAME)
+        self.plot_type = PlotType.white_noise_normalised
         self.setupUi()
         self.show()
 
     def setupUi(self):
-        self.build_plot_button.clicked.connect(self.close)
+        self.setFixedSize(self.width(), self.height())
+        self.build_plot_button.clicked.connect(self.btn_clicked)
+        if self.parent().signal.frequency:
+            self.frequency_text_edit.setPlainText(str(self.parent().signal.frequency))
 
+    def btn_clicked(self):
+        data = {}
+        from utils import model_plot
+        try:
+            data = dict(a=float(self.a.toPlainText()),
+                        frequency=float(self.frequency_text_edit.toPlainText()),
+                        sigma=float(self.sigma.toPlainText()))
+
+        except ValueError:
+            open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
+        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 class FragmentDialog(QDialog):
     def __init__(self, plot_widget=None):
