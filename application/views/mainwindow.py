@@ -2,7 +2,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction
 
 from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
-    ERROR_TEXT, SIGNAL_FRAGMENT_ACTION_TEXT
+    ERROR_TEXT, SIGNAL_FRAGMENT_ACTION_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME
 from application.dialogs import AboutDialog, open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information
 from plot_widget import MyPlotWidget
@@ -31,6 +31,16 @@ class MainWindow(QMainWindow):
         self.open_file_action.triggered.connect(
             lambda: self.clear_layout(layout=self.graphs_layout) and open_file_dialog(self))
 
+        self.open_sinusoid = QAction(SINUSOID_NAME, self)
+        self.open_meander = QAction(MEANDER_NAME, self)
+        self.saw = QAction(SAW_NAME, self)
+        self.menu_2.addAction(self.open_sinusoid)
+        self.open_sinusoid.triggered.connect(
+
+        )
+        self.menu_2.addAction(self.open_meander)
+        self.menu_2.addAction(self.saw)
+
         # Analyzing menu action
 
         self.signal_information_action = QAction(SIGNAL_INFORMATION_ACTION_TEXT, self)
@@ -53,7 +63,6 @@ class MainWindow(QMainWindow):
         for name, plot in plots.items():
             self.plots.append(MyPlotWidget(self, plot_data=plot, frequency=self.signal.frequency))
             self.graphs_layout.addWidget(self.plots[-1])
-
             checkbox = MyCheckBox(name, self.plots[-1], checked=True)
             checkbox.stateChanged.connect(checkbox.change_visible)
             self.name_plot_layout.addWidget(checkbox)
@@ -75,6 +84,3 @@ class MainWindow(QMainWindow):
                 child.widget().deleteLater()
         return True
 
-    @staticmethod
-    def open_about_us_dialog():
-        AboutDialog().exec()
