@@ -3,7 +3,9 @@ from PyQt5.QtWidgets import QDialog, QMessageBox
 
 from application import consts
 from application.consts import ABOUT_PATH, FRAGMENT_PATH, EXP_ENVELOPE_PATH, BALANCE_ENVELOPE_PATH, \
-    DELAYED_SINGLE_IMPULSE_PATH
+    DELAYED_SINGLE_IMPULSE_PATH, WHITE_NOISE_INTERVAL_NAME, WHITE_NOISE_INTERVAL_PATH, \
+    WHITE_NOISE_NORMAL_LAW_NAME, WHITE_NOISE_NORMAL_LAW_PATH
+
 from application.consts import DELAYED_SINGLE_LEAP_PATH, DECREASING_EXP_PATH
 from application.consts import SINUSOID_PATH, MEANDER_PATH, SAW_PATH
 from plot_modelling import PlotType
@@ -199,6 +201,30 @@ class BalanceEnvelope(QDialog):
 
     def setupUi(self):
         self.OkButton.clicked.connect(self.btn_clicked)
+
+
+class WhiteNoiseDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent=parent)
+        uic.loadUi(WHITE_NOISE_INTERVAL_PATH, self)
+        self.setWindowTitle(consts.WHITE_NOISE_INTERVAL_NAME)
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.build_plot_button.clicked.connect(self.close)
+
+
+class WhiteNoiseNormalisedDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent=parent)
+        uic.loadUi(WHITE_NOISE_NORMAL_LAW_PATH, self)
+        self.setWindowTitle(consts.WHITE_NOISE_NORMAL_LAW_NAME)
+        self.setupUi()
+        self.show()
+
+    def setupUi(self):
+        self.build_plot_button.clicked.connect(self.close)
 
 
 class FragmentDialog(QDialog):

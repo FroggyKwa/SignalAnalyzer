@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QFileDialog, QCheckBox
 import plot_modelling
 from dialogs import AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp, BalanceEnvelope
 from dialogs import ExpEnvelope
-from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog
+from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog, WhiteNoiseDialog, WhiteNoiseNormalisedDialog
 from dialogs import open_warning_messagebox
 from views.information_dialog import InformationDialog
 
@@ -76,6 +76,14 @@ def open_delayed_single_leap_dialog(parent=None):
 
 def open_decreasing_exp_dialog(parent=None):
     DecreasingExp(parent=parent).exec()
+
+
+def open_white_noise_dialog(parent=None):
+    WhiteNoiseDialog(parent=parent).exec()
+
+
+def open_white_noise_normalised_dialog(parent=None):
+    WhiteNoiseNormalisedDialog(parent=parent).exec()
 
 
 def model_plot(window, plot_type=None, **kwargs):

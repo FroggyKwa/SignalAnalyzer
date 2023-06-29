@@ -19,10 +19,10 @@ DECREASING_EXP_NAME = 'Дискретизированная убывающая �
 
 
 WHITE_NOISE_INTERVAL_NAME = 'Сигнала белого шума,  равномерно распределенного в интервале'
-WHITE_NOISE_INTERVAL_PATH = ''
+WHITE_NOISE_INTERVAL_PATH = 'ui/WhiteNoise.ui'
 
 WHITE_NOISE_NORMAL_LAW_NAME = 'Сигнала белого шума, распределенного по нормальному закону'
-WHITE_NOISE_NORMAL_LAW_PATH = ''
+WHITE_NOISE_NORMAL_LAW_PATH = 'ui/WhiteNoiseNormalised.ui'
 
 RANDOM_AUTOREGRESSIVE_SIGNAL_NAME = 'Случайного сигнал авторегрессии-скользящего среднего порядка'
 RANDOM_AUTOREGRESSIVE_SIGNAL_PATH = ''
@@ -62,3 +62,4 @@ EXP_ENVELOPE_PATH = 'ui/ExpEnvelope.ui'
 
 EXP_ENVELOPE_NAME = 'Сигнал с экспоненциальной огибающей - амплитудная модуляция'
 BALANCE_ENVELOPE_PATH = 'ui/BalanceEnvelope.ui'
+
