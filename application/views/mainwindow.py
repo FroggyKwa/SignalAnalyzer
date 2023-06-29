@@ -5,6 +5,9 @@ from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMA
     ERROR_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME
 from application.dialogs import open_warning_messagebox, AboutDialog
 from application.utils import open_file_dialog, show_signal_information, open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
+from application.dialogs import open_warning_messagebox
+from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
+    open_delayed_single_impulse_dialog
 from plot_widget import MyPlotWidget
 from signal.signal import Signal
 from utils import MyCheckBox
@@ -23,7 +26,7 @@ class MainWindow(QMainWindow):
     def setupUi(self):
         self.action_list = []
         # About us menu trigger
-        self.menu_6.aboutToShow.connect(self.open_about_us_dialog)
+        self.menu_6.aboutToShow.connect(open_about_us_dialog)
 
         # Open file menu action
         self.open_file_action = QAction(OPEN_ACTION_TEXT, self)
@@ -42,6 +45,22 @@ class MainWindow(QMainWindow):
         self.meander_action.triggered.connect(open_meander_dialog)
         self.saw_action.triggered.connect(open_saw_dialog)
 
+        self.delayed_single_impulse_action = QAction(DELAYED_SINGLE_IMPULSE_NAME, self)
+        self.delayed_single_impulse_action.triggered.connect(open_delayed_single_impulse_dialog)
+        self.delayed_single_leap_action = QAction(DELAYED_SINGLE_LEAP_NAME, self)
+        self.dicreasing_exp = QAction(DECREASING_EXP, self)
+
+        self.open_sinusoid = QAction(SINUSOID_NAME, self)
+        self.open_meander = QAction(MEANDER_NAME, self)
+        self.saw = QAction(SAW_NAME, self)
+
+        self.menu_2.addAction(self.delayed_single_impulse_action)
+        self.menu_2.addAction(self.delayed_single_leap_action)
+        self.menu_2.addAction(self.dicreasing_exp)
+
+        self.menu_2.addAction(self.open_sinusoid)
+        self.menu_2.addAction(self.open_meander)
+        self.menu_2.addAction(self.saw)
 
         # Analyzing menu action
 
@@ -85,8 +104,3 @@ class MainWindow(QMainWindow):
             if child.widget():
                 child.widget().deleteLater()
         return True
-
-    @staticmethod
-    def open_about_us_dialog():
-        AboutDialog().exec()
-

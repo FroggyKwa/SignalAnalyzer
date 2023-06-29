@@ -1,7 +1,8 @@
 import os
 
-from PyQt5.QtWidgets import QFileDialog, QMessageBox, QCheckBox
+from PyQt5.QtWidgets import QFileDialog, QCheckBox
 
+from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse
 from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog
 from views.information_dialog import InformationDialog
 
@@ -38,6 +39,14 @@ class MyCheckBox(QCheckBox):
             self.plot.show()
         else:
             self.plot.hide()
+
+
+def open_about_us_dialog():
+    AboutDialog().exec()
+
+
+def open_delayed_single_impulse_dialog():
+    DelayedSingleImpulse().exec()
 
 def open_sinusoid_dialog():
     SinusoidDialog().exec()
