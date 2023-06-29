@@ -28,8 +28,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>60</y>
+     <x>70</x>
+     <y>50</y>
      <width>16</width>
      <height>20</height>
     </rect>
@@ -43,29 +43,11 @@
     <string>a</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="start">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>104</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="plainText">
-    <string>0</string>
-   </property>
-  </widget>
   <widget class="QPlainTextEdit" name="a">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>80</y>
+     <x>40</x>
+     <y>70</y>
      <width>111</width>
      <height>31</height>
     </rect>
@@ -97,47 +79,11 @@
     <string>Построить</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QPlainTextEdit" name="frequency_text_edit">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>20</y>
-     <width>66</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Конец</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>66</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Начало</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="end">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>40</y>
+     <x>210</x>
+     <y>70</y>
      <width>104</width>
      <height>31</height>
     </rect>
@@ -147,8 +93,23 @@
      <pointsize>10</pointsize>
     </font>
    </property>
-   <property name="plainText">
-    <string>60</string>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>50</y>
+     <width>66</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Частота</string>
    </property>
   </widget>
  </widget>
