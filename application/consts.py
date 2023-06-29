@@ -51,6 +51,8 @@ DECREASING_EXP_PATH = 'ui/DiscretizedDecreasingExponent.ui'
 
 OPEN_ACTION_TEXT = 'Открыть'
 
+SAVE_FILE_ACTION_TEXT = 'Сохранить как'
+
 SIGNAL_INFORMATION_ACTION_TEXT = 'Информация о сигнале'
 
 SIGNAL_FRAGMENT_ACTION_TEXT = 'Фрагмент'
@@ -67,4 +69,5 @@ BALANCE_ENVELOPE_NAME = 'Cигнал с балансной огибающей - 
 TONAL_ENVELOPE_PATH = 'ui/TonalEnvelope.ui'
 TONAL_ENVELOPE_NAME = 'Cигнал с тональной огибающей. - амплитудная модуляция'
 
-
+LINEAR_FREQUENCY_MODULATION_PATH = 'ui/LinearFrequencyModulation.ui'
+LINEAR_FREQUENCY_MODULATION_NAME = 'Сигнал с линейной частотной модуляцией (ЛЧМ - сигнал)'

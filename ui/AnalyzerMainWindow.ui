@@ -103,8 +103,6 @@
     <property name="title">
      <string>Моделирование</string>
     </property>
-    <addaction name="exp_envelope_action"/>
-    <addaction name="balance_envelope_action"/>
    </widget>
    <widget class="QMenu" name="menu_7">
     <property name="title">
