@@ -13,6 +13,7 @@ from views.information_dialog import InformationDialog
 
 
 def open_file_dialog(mainwindow):
+    mainwindow.plots.clear()
     options = QFileDialog.Options()
     options |= QFileDialog.DontUseNativeDialog
     filename, _ = QFileDialog.getOpenFileName(mainwindow,
