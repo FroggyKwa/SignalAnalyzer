@@ -65,7 +65,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>28</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -103,6 +103,8 @@
     <property name="title">
      <string>Моделирование</string>
     </property>
+    <addaction name="exp_envelope_action"/>
+    <addaction name="balance_envelope_action"/>
    </widget>
    <widget class="QMenu" name="menu_7">
     <property name="title">
@@ -120,6 +122,16 @@
   <action name="open_file_action">
    <property name="text">
     <string>Открыть</string>
+   </property>
+  </action>
+  <action name="exp_envelope_action">
+   <property name="text">
+    <string>Сигнал с экспоненциальной огибающей</string>
+   </property>
+  </action>
+  <action name="balance_envelope_action">
+   <property name="text">
+    <string>Cигнал с балансной огибающей</string>
    </property>
   </action>
  </widget>

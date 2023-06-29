@@ -8,7 +8,7 @@ from pyqtgraph import PlotWidget, InfiniteLine
 from consts import SIGNAL_FRAGMENT_ACTION_TEXT
 from dialogs import open_warning_messagebox
 from utils import show_fragment_dialog
-
+from plot_modelling import model_plot
 
 class MyPlotWidget(PlotWidget):
     def __init__(self, mainwindow, plot_data=None, frequency=None, **kwargs):
