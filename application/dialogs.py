@@ -486,7 +486,8 @@ class BaseOperationDialog(QDialog):
         if name_1 and name_2:
             add_data_to_plots(
                 self.parent(),
-                data)
+                data,
+                frequency=(self.parent().signal.frequency if self.parent().signal.frequency else 1))
         else:
             open_warning_messagebox('Ошибка!', 'Не выбраны все операнды!')
 

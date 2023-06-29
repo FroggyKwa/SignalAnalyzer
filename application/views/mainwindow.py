@@ -84,7 +84,7 @@ class MainWindow(QMainWindow):
         # Analyzing menu action
 
         self.signal_information_action = QAction(SIGNAL_INFORMATION_ACTION_TEXT, self)
-        self.menu_3.addAction(self.signal_information_action)
+        self.menu_4.addAction(self.signal_information_action)
         self.signal_information_action.triggered.connect(lambda: show_signal_information(
             n_channels=self.signal.n_channels,
             n_signals=self.signal.n_signals,
