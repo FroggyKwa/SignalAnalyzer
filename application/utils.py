@@ -1,15 +1,20 @@
 import os
+import statistics
 
-from PyQt5.QtWidgets import QFileDialog, QCheckBox
+import numpy
+from PyQt5.QtWidgets import QFileDialog, QCheckBox, QAction
 
 import plot_modelling
+
 from dialogs import AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp, BalanceEnvelope, TonalEnvelope, \
-    LinearFrequencyModulation, AdditionDialog, MultiplicationDialog
+    LinearFrequencyModulation, AdditionDialog, MultiplicationDialog, StatisticDialog
 from dialogs import ExpEnvelope
 from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog, WhiteNoiseDialog, \
     WhiteNoiseNormalisedDialog
 from dialogs import open_warning_messagebox
 from views.information_dialog import InformationDialog
+
+from scipy.stats import skew, kurtosis
 
 
 def open_file_dialog(mainwindow):
@@ -56,6 +61,23 @@ def add_data_to_plots(window, plots, **kwargs):
 
         for p in window.plots:
             p.setFixedSize(window.size().width() - 50, (window.size().height() - 70) // n - 10)
+        name_plot_action = QAction(name, window)
+        name_plot_action.plot = plot
+        window.menu_8.addAction(name_plot_action)
+        name_plot_action.triggered.connect(lambda: show_statistics_for_current(window))
+        # QAction.triggered.connect()
+
+
+def show_statistics_for_current(mw):
+    plot = mw.sender().plot[1]
+    StatisticDialog(
+        standard_deviation=numpy.std(plot),
+        average=statistics.mean(plot), dispersion=statistics.variance(plot),
+        coef_of_variation=statistics.pvariance(plot),
+        skewness=skew(plot), excess_kurtosis=kurtosis(plot), minimal_value=min(plot),
+        maximum_value=max(plot), quantile_005=numpy.quantile(plot, 0.05), quantile_095=numpy.quantile(plot, 0.95),
+        median=statistics.median(plot)
+    ).exec()
 
 
 def show_signal_information(**info):

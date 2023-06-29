@@ -100,17 +100,12 @@ class MainWindow(QMainWindow):
         self.menu_7.addAction(self.multiplication_signals_action)
         self.multiplication_signals_action.triggered.connect(lambda: open_multiplication_dialog(self))
 
-
-
-
     def setup_signal_from_file(self, filename):
         try:
             add_data_to_plots(self, self.signal.load_file(filename))
         except ValueError:
             open_warning_messagebox(title=ERROR_TITLE,
                                     text=ERROR_TEXT)
-
-
 
     def resizeEvent(self, event):
         for plot in self.plots:

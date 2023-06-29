@@ -1,5 +1,5 @@
 from PyQt5 import uic
-from PyQt5.QtWidgets import QDialog, QMessageBox
+from PyQt5.QtWidgets import QDialog, QMessageBox, QHeaderView, QTableWidgetItem
 
 from application import consts
 from application.consts import *
@@ -386,6 +386,65 @@ class FragmentDialog(QDialog):
 
     def end_button_handler(self):
         self.stop.setPlainText(str(self.plot_widget.plot_data[0][-1]))
+
+
+class StatisticDialog(QDialog):
+    def __init__(self,
+                 average=None,
+                 dispersion=None,
+                 standard_deviation=None,
+                 coef_of_variation=None,
+                 skewness=None,
+                 excess_kurtosis=None,
+                 minimal_value=None,
+                 maximum_value=None,
+                 quantile_005=None,
+                 quantile_095=None,
+                 median=None,
+                 ):
+        super(QDialog, self).__init__()
+        uic.loadUi(STATISTICS_PATH, self)
+        self.average = average
+        self.dispersion = dispersion
+        self.standard_deviation = standard_deviation
+        self.coef_of_variation = coef_of_variation
+        self.skewness = skewness
+        self.excess_kurtosis = excess_kurtosis
+        self.minimal_value = minimal_value
+        self.maximum_value = maximum_value
+        self.quantile_005 = quantile_005
+        self.quantile_095 = quantile_095
+        self.median = median
+        self.setupUi()
+
+    def setupUi(self):
+        COLUMNS = 2
+        ROWS = 11
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setColumnCount(COLUMNS)
+        self.table.setRowCount(ROWS)
+        self.table.setHorizontalHeaderLabels(['Информация', 'Значение'])
+
+        info = [
+            {'Среднее': self.average},
+            {'Дисперсия': self.dispersion},
+            {'Среднеквадратичное отклонение': self.standard_deviation},
+            {'Коэффициент вариации': self.coef_of_variation},
+            {'Коэффициент асимметрии': self.skewness},
+            {'Коэффициент эксцесса': self.excess_kurtosis},
+            {'Минимальное значение сигнала': self.minimal_value},
+            {'Максимальное значение сигнала': self.maximum_value},
+            {'Квантиль порядка 0.05': self.quantile_005},
+            {'Квантиль порядка 0.95': self.quantile_095},
+            {'Медиана': self.median},
+        ]
+        cnt = 0
+        for i in info:
+            for name, value in i.items():
+                self.table.setItem(cnt, 0, QTableWidgetItem(str(name)))
+                self.table.setItem(cnt, 1, QTableWidgetItem(str(value)))
+            cnt += 1
 
 
 class BaseOperationDialog(QDialog):
