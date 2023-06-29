@@ -84,7 +84,7 @@
     </rect>
    </property>
    <property name="placeholderText">
-    <string>от о до П</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -110,7 +110,7 @@
     </rect>
    </property>
    <property name="placeholderText">
-    <string>от 0 до 2П</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="build_plot_button">
@@ -152,7 +152,7 @@
     <string>Частота</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="a_2">
+  <widget class="QTextEdit" name="frequency_text_edit">
    <property name="geometry">
     <rect>
      <x>100</x>

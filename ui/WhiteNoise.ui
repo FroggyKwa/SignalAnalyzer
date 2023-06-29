@@ -136,6 +136,11 @@
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
   </widget>
   <widget class="QPushButton" name="build_plot_button">
    <property name="geometry">

@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>867</width>
-    <height>388</height>
+    <width>865</width>
+    <height>287</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>865</width>
+    <height>287</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>865</width>
+    <height>287</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -16,11 +28,16 @@
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>9</y>
+     <x>10</x>
+     <y>-10</y>
      <width>855</width>
      <height>281</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="3" column="6">
@@ -37,10 +54,20 @@
         <height>30</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
      </widget>
     </item>
     <item row="6" column="3">
      <spacer name="verticalSpacer_2">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -65,6 +92,11 @@
         <width>200</width>
         <height>30</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
      </widget>
     </item>
@@ -95,10 +127,20 @@
         <height>30</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
      </widget>
     </item>
     <item row="5" column="5">
      <widget class="QLabel" name="width_envelope">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Частота
 в конечный
@@ -108,11 +150,16 @@
     </item>
     <item row="1" column="0" colspan="8">
      <widget class="QLabel" name="label_5">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Cигнал с линейной частотной модуляцией</string>
+       <string/>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -121,6 +168,11 @@
     </item>
     <item row="2" column="3">
      <spacer name="verticalSpacer_3">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -134,6 +186,11 @@
     </item>
     <item row="0" column="3">
      <spacer name="verticalSpacer_5">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -147,6 +204,11 @@
     </item>
     <item row="5" column="2">
      <widget class="QLabel" name="frequency">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Частота
 в начальный
@@ -156,6 +218,11 @@
     </item>
     <item row="4" column="3">
      <spacer name="verticalSpacer">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -169,6 +236,11 @@
     </item>
     <item row="7" column="4">
      <spacer name="horizontalSpacer">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -194,10 +266,20 @@
         <height>30</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
      </widget>
     </item>
     <item row="3" column="2">
      <widget class="QLabel" name="label1">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Частота
 дискретизации</string>
@@ -206,6 +288,11 @@
     </item>
     <item row="3" column="5">
      <widget class="QLabel" name="amplitude_edit">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Амплитуда
 сигнала</string>
@@ -214,6 +301,11 @@
     </item>
     <item row="8" column="4">
      <widget class="QPushButton" name="build_plot_button">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Построить</string>
       </property>
@@ -221,6 +313,11 @@
     </item>
     <item row="5" column="0">
      <spacer name="horizontalSpacer_2">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -234,6 +331,11 @@
     </item>
     <item row="5" column="1">
      <spacer name="horizontalSpacer_4">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -247,6 +349,11 @@
     </item>
     <item row="7" column="5">
      <widget class="QLabel" name="start_fase_2">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Начальная фаза </string>
       </property>
@@ -265,6 +372,11 @@
         <width>200</width>
         <height>30</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
      </widget>
     </item>

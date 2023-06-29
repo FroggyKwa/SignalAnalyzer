@@ -73,9 +73,10 @@ class MyCheckBox(QCheckBox):
         super().__init__(name, checked=checked)
         self.plot = plot
 
-    def change_visible(self):
+    def change_visible(self, window):
         if self.isChecked():
             self.plot.show()
+
         else:
             self.plot.hide()
 
