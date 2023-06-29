@@ -2,11 +2,11 @@ import os
 
 from PyQt5.QtWidgets import QFileDialog, QCheckBox
 
-from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse, ExpEnvelope
 import plot_modelling
-from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse, open_warning_messagebox
-from dialogs import FragmentDialog, AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp
+from dialogs import AboutDialog, DelayedSingleImpulse, DelayedSingleLeap, DecreasingExp, BalanceEnvelope
+from dialogs import ExpEnvelope
 from dialogs import FragmentDialog, SawDialog, SinusoidDialog, MeanderDialog
+from dialogs import open_warning_messagebox
 from views.information_dialog import InformationDialog
 
 
@@ -89,21 +89,22 @@ def model_plot(window, plot_type=None, **kwargs):
     except ValueError:
         open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
 
+
 def open_sinusoid_dialog(parent=None):
     SinusoidDialog(parent=parent).exec()
 
+
+def open_exp_envelope_dialog(parent=None):
+    ExpEnvelope(parent=parent).exec()
+
+
+def open_balance_envelope_dialog(parent=None):
+    BalanceEnvelope(parent=parent).exec()
+
+
 def open_saw_dialog(parent=None):
-    SawDialog(parent=parent).exec()
+    SawDialog(parent).exec()
 
-def open_exp_envelope_dialog():
-    ExpEnvelope().exec()
-
-
-def open_balance_envelope_dialog():
-    ExpEnvelope().exec()
-
-def open_saw_dialog():
-    SawDialog().exec()
 
 def open_meander_dialog(parent=None):
     MeanderDialog(parent=parent).exec()
