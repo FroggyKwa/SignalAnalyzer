@@ -36,9 +36,7 @@ class MainWindow(QMainWindow):
         self.sinusoid_action = QAction(SINUSOID_NAME, self)
         self.meander_action = QAction(MEANDER_NAME, self)
         self.saw_action = QAction(SAW_NAME, self)
-        self.menu_2.addAction(self.meander_action)
-        self.menu_2.addAction(self.sinusoid_action)
-        self.menu_2.addAction(self.saw_action)
+
 
         self.sinusoid_action.triggered.connect(lambda: open_sinusoid_dialog(self))
         self.meander_action.triggered.connect(lambda: open_meander_dialog(self))
@@ -50,28 +48,32 @@ class MainWindow(QMainWindow):
         )
         self.delayed_single_leap_action = QAction(DELAYED_SINGLE_LEAP_NAME, self)
         self.delayed_single_leap_action.triggered.connect(lambda: open_delayed_single_leap_dialog(self))
-        self.dicreasing_exp = QAction(DECREASING_EXP_NAME, self)
-        self.dicreasing_exp.triggered.connect(lambda: open_decreasing_exp_dialog(self))
+        self.decreasing_exp = QAction(DECREASING_EXP_NAME, self)
+        self.decreasing_exp.triggered.connect(lambda: open_decreasing_exp_dialog(self))
 
         self.open_sinusoid = QAction(SINUSOID_NAME, self)
         self.open_meander = QAction(MEANDER_NAME, self)
         self.saw = QAction(SAW_NAME, self)
 
-        self.menu_2.addAction(self.delayed_single_impulse_action)
-        self.menu_2.addAction(self.delayed_single_leap_action)
-        self.menu_2.addAction(self.dicreasing_exp)
-
-
         self.exp_envelope_action.triggered.connect(lambda: open_exp_envelope_dialog(self))
         self.balance_envelope_action.triggered.connect(lambda: open_balance_envelope_dialog(self))
 
         self.white_noise_action = QAction(WHITE_NOISE_INTERVAL_NAME, self)
-        self.menu_2.addAction(self.white_noise_action)
         self.white_noise_action.triggered.connect(lambda: open_white_noise_dialog(self))
 
         self.white_noise_nornalised_action = QAction(WHITE_NOISE_NORMAL_LAW_NAME, self)
-        self.menu_2.addAction(self.white_noise_nornalised_action)
         self.white_noise_nornalised_action.triggered.connect(lambda: open_white_noise_normalised_dialog(self))
+
+        self.menu_2.addAction(self.delayed_single_impulse_action)
+        self.menu_2.addAction(self.delayed_single_leap_action)
+        self.menu_2.addAction(self.decreasing_exp)
+        self.menu_2.addAction(self.sinusoid_action)
+        self.menu_2.addAction(self.meander_action)
+        self.menu_2.addAction(self.saw_action)
+        self.menu_2.addAction(self.white_noise_action)
+        self.menu_2.addAction(self.white_noise_nornalised_action)
+
+
         # Analyzing menu action
 
         self.signal_information_action = QAction(SIGNAL_INFORMATION_ACTION_TEXT, self)
