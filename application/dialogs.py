@@ -29,7 +29,7 @@ class SinusoidDialog(QDialog):
         self.show()
 
     def setupUi(self):
-        self.pushButton.clicked.connect(self.close)
+        self.build_plot_button.clicked.connect(self.close)
 
 
 class SawDialog(QDialog):
@@ -41,7 +41,7 @@ class SawDialog(QDialog):
         self.show()
 
     def setupUi(self):
-        self.pushButton.clicked.connect(self.close)
+        self.build_plot_button.clicked.connect(self.close)
 
 
 class MeanderDialog(QDialog):
@@ -53,7 +53,7 @@ class MeanderDialog(QDialog):
         self.show()
 
     def setupUi(self):
-        self.pushButton.clicked.connect(self.close)
+        self.build_plot_button.clicked.connect(self.close)
 
 class FragmentDialog(QDialog):
     def __init__(self, plot_widget=None):
