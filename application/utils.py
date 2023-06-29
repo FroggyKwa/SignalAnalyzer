@@ -40,6 +40,8 @@ def add_data_to_plots(window, plots, **kwargs):
         window.plots[-1].setFixedSize(window.size().width() - 50, (window.size().height() - 70) // len(plots) - 10)
 
 
+
+
 def show_signal_information(**info):
     info_dialog = InformationDialog(**info)
     info_dialog.exec()
@@ -110,8 +112,8 @@ def open_balance_envelope_dialog(parent=None):
     BalanceEnvelope(parent=parent).exec()
 
 
-def open_tonal_envelope_dialog(parent=None):
-    Tonal(parent=parent).exec()
+# def open_tonal_envelope_dialog(parent=None):
+#     Tonal(parent=parent).exec()
 
 
 def open_saw_dialog(parent=None):

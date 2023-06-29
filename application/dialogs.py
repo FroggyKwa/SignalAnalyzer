@@ -43,9 +43,10 @@ class DelayedSingleImpulse(QDialog):
             data = dict(n0=int(self.n_0.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText())
                         )
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class SinusoidDialog(QDialog):
@@ -70,9 +71,10 @@ class SinusoidDialog(QDialog):
                         frequency=float(self.frequency_text_edit.toPlainText()),
                         fi=float(self.fi.toPlainText()),
                         w=float(self.w.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class SawDialog(QDialog):
@@ -96,9 +98,10 @@ class SawDialog(QDialog):
         try:
             data = dict(l=int(self.l.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class MeanderDialog(QDialog):
@@ -122,9 +125,10 @@ class MeanderDialog(QDialog):
         try:
             data = dict(l=int(self.l.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class DelayedSingleLeap(QDialog):
@@ -148,9 +152,10 @@ class DelayedSingleLeap(QDialog):
         try:
             data = dict(n0=int(self.n_0.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class DecreasingExp(QDialog):
@@ -174,9 +179,10 @@ class DecreasingExp(QDialog):
         try:
             data = dict(a=float(self.a.toPlainText()),
                         frequency=float(self.frequency_text_edit.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class ExpEnvelope(QDialog):
@@ -202,10 +208,11 @@ class ExpEnvelope(QDialog):
                         t=float(self.t.toPlainText()),
                         fn=float(self.fn.toPlainText()),
                         fi=float(self.fi.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
 
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class BalanceEnvelope(QDialog):
@@ -231,10 +238,11 @@ class BalanceEnvelope(QDialog):
                         fo=float(self.fo.toPlainText()),
                         fn=float(self.fn.toPlainText()),
                         fi=float(self.fi.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
 
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class TonalEnvelope(QDialog):
@@ -260,11 +268,12 @@ class TonalEnvelope(QDialog):
                         fo=float(self.fo.toPlainText()),
                         fn=float(self.fn.toPlainText()),
                         fi=float(self.fi.toPlainText()),
-                        m=float(self.m.toPlainText())),
+                        m=float(self.m.toPlainText()))
+            model_plot(self.parent(), plot_type=self.plot_type, **data)
+            self.close()
 
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
-        model_plot(self.parent(), plot_type=self.plot_type, **data)
 
 
 class WhiteNoiseDialog(QDialog):
