@@ -3,6 +3,7 @@ import statistics
 import threading
 
 import numpy
+import scipy
 from PyQt5.QtWidgets import QFileDialog, QCheckBox, QAction
 from scipy.stats import skew, kurtosis
 
@@ -49,6 +50,7 @@ def add_data_to_plots(window, plots, **kwargs):
             MyPlotWidget(
                 window,
                 plot_data=plot,
+                name=name,
                 frequency=kwargs.get('frequency') or window.signal.frequency))
         window.graphs_layout.addWidget(window.plots[-1])
         checkbox = MyCheckBox(name, window.plots[-1], checked=True)
@@ -218,3 +220,10 @@ def save_as(filename, signal):
         for line in data:
             file.writelines(map(lambda x: x + ' ', map(str, line)))
             file.write('\n')
+
+
+def add_fft_to_plot(widget, name):
+    data = widget.plot_data
+    amplitudeSpectrum = [numpy.sqrt(c.real ** 2 + c.imag ** 2) for c in scipy.fft.fft(data[1])]
+    data = (data[0], amplitudeSpectrum)
+    add_data_to_plots(widget.mainwindow, {f"{name}-Фурье": data})

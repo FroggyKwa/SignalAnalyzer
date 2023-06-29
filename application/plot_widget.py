@@ -7,11 +7,11 @@ from pyqtgraph import PlotWidget, InfiniteLine
 
 from consts import *
 from dialogs import open_warning_messagebox
-from utils import show_fragment_dialog, show_statistics_for_current
+from utils import show_fragment_dialog, show_statistics_for_current, add_fft_to_plot
 
 
 class MyPlotWidget(PlotWidget):
-    def __init__(self, mainwindow, plot_data=None, frequency=None, **kwargs):
+    def __init__(self, mainwindow, plot_data=None, frequency=None, name=None, **kwargs):
         super().__init__(**kwargs)
         self.mainwindow = mainwindow
         self.scene().sigMouseClicked.connect(self.mouse_clicked)
@@ -21,6 +21,7 @@ class MyPlotWidget(PlotWidget):
         self.line_2 = None
         self.plot_data = plot_data
         self.frequency = frequency
+        self.name = name
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu(self)
@@ -31,7 +32,7 @@ class MyPlotWidget(PlotWidget):
         if action == fragment_action:
             show_fragment_dialog(self)
         if action == fourier_action:
-            pass
+            add_fft_to_plot(self, self.name)
         elif action == stats_action:
             show_statistics_for_current(plot=self.plot_data)
 
