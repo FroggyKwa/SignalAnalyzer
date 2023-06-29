@@ -39,15 +39,7 @@
     <item row="8" column="3">
      <widget class="QPushButton" name="OkButton">
       <property name="text">
-       <string>Ок</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLabel" name="amplitude_edit">
-      <property name="text">
-       <string>Амплитуда
-сигнала</string>
+       <string>Построить</string>
       </property>
      </widget>
     </item>
@@ -77,27 +69,6 @@
       </property>
      </spacer>
     </item>
-    <item row="3" column="4">
-     <widget class="QLabel" name="end_edit">
-      <property name="text">
-       <string>Конец</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="5">
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item row="5" column="2">
-     <widget class="QLineEdit" name="lineEdit_4"/>
-    </item>
-    <item row="7" column="4">
-     <widget class="QLabel" name="start_fase">
-      <property name="text">
-       <string>Начальная
-фаза несущей</string>
-      </property>
-     </widget>
-    </item>
     <item row="6" column="2">
      <spacer name="verticalSpacer_2">
       <property name="orientation">
@@ -112,18 +83,7 @@
      </spacer>
     </item>
     <item row="3" column="2">
-     <widget class="QLineEdit" name="start_edit"/>
-    </item>
-    <item row="3" column="5">
-     <widget class="QLineEdit" name="lineEdit_8"/>
-    </item>
-    <item row="7" column="1">
-     <widget class="QLabel" name="frequency">
-      <property name="text">
-       <string>Частота
-несущей</string>
-      </property>
-     </widget>
+     <widget class="QLineEdit" name="start"/>
     </item>
     <item row="5" column="0">
      <spacer name="horizontalSpacer_2">
@@ -151,9 +111,6 @@
       </property>
      </spacer>
     </item>
-    <item row="7" column="2">
-     <widget class="QLineEdit" name="lineEdit_5"/>
-    </item>
     <item row="5" column="4">
      <widget class="QLabel" name="frequency_envelope">
       <property name="text">
@@ -168,7 +125,7 @@
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Сигнал с экспоненциальной огибающей</string>
+       <string>Сигнал с балансной огибающей</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -176,14 +133,15 @@
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QLabel" name="start_edit_2">
+     <widget class="QLabel" name="frequency_text_edit">
       <property name="text">
-       <string>Начало</string>
+       <string>Частота
+дискретизации</string>
       </property>
      </widget>
     </item>
     <item row="5" column="5">
-     <widget class="QLineEdit" name="lineEdit_6"/>
+     <widget class="QLineEdit" name="fo"/>
     </item>
     <item row="2" column="2">
      <spacer name="verticalSpacer_3">
@@ -197,6 +155,39 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="3" column="4">
+     <widget class="QLabel" name="amplitude_edit">
+      <property name="text">
+       <string>Амплитуда
+сигнала</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="5">
+     <widget class="QLineEdit" name="a"/>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="frequency">
+      <property name="text">
+       <string>Частота
+несущей</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="2">
+     <widget class="QLineEdit" name="fn"/>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLabel" name="start_fase">
+      <property name="text">
+       <string>Начальная
+фаза несущей</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="2">
+     <widget class="QLineEdit" name="fi"/>
     </item>
    </layout>
   </widget>

@@ -89,7 +89,6 @@ class MainWindow(QMainWindow):
         self.multiplication_signals_action = QAction(application.consts.MULTIPLICATION_CHANNELS_NAME, self)
         self.menu_7.addAction(self.multiplication_signals_action)
 
-
     def setup_signal_from_file(self, filename):
         try:
             add_data_to_plots(self, self.signal.load_file(filename))
