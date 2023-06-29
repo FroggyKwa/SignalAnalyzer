@@ -114,6 +114,7 @@ class MainWindow(QMainWindow):
     def clear_layout(self, layout):
         self.plots.clear()
         self.signal = Signal()
+        self.menu_8.clear()
         while layout.count():
             child = layout.takeAt(0)
             if child.widget():
