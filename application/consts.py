@@ -19,6 +19,20 @@ DELAYED_SINGLE_LEAP_NAME = 'Задержанный единичный скачо
 DECREASING_EXP = 'Дискретизированная убывающая экспонента'
 
 
+DELAYED_SINGLE_IMPULSE_NAME = 'Задержанный единичный импульс'
+DELAYED_SINGLE_LEAP_NAME = 'Задержанный единичный скачок'
+DECREASING_EXP = 'Дискретизированная убывающая экспонента'
+
+WHITE_NOISE_INTERVAL_NAME = 'Сигнала белого шума,  равномерно распределенного в интервале'
+WHITE_NOISE_INTERVAL_PATH = ''
+
+WHITE_NOISE_NORMAL_LAW_NAME = 'Сигнала белого шума, распределенного по нормальному закону'
+WHITE_NOISE_NORMAL_LAW_PATH = ''
+
+RANDOM_AUTOREGRESSIVE_SIGNAL_NAME = 'Случайного сигнал авторегрессии-скользящего среднего порядка'
+RANDOM_AUTOREGRESSIVE_SIGNAL_PATH = ''
+
+
 MODELING_PATH = 'ui/Modeling.ui'
 MODELING_TITLE = 'Моделирование'
 
@@ -29,6 +43,12 @@ SCALED_PLOT_PATH = 'ui/ScaledPlot.ui'
 
 
 DELAYED_SINGLE_IMPULSE = 'ui/DelayedSingleImpulse.ui'
+
+
+DELAYED_SINGLE_IMPULSE = 'ui/DelayedSingleImpulse.ui'
+DELAYED_SINGLE_LEAP_PATH = 'ui/DelayedSingleLeap.ui'
+DECREASING_EXP_PATH = 'ui/DiscretizedDecreasingExponent.ui'
+
 
 OPEN_ACTION_TEXT = 'Открыть'
 

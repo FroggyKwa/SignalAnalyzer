@@ -2,12 +2,12 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction
 
 from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
-    ERROR_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME
-from application.dialogs import open_warning_messagebox, AboutDialog
-from application.utils import open_file_dialog, show_signal_information, open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
+    ERROR_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME, DELAYED_SINGLE_LEAP_NAME, DELAYED_SINGLE_IMPULSE_NAME, \
+    DECREASING_EXP
 from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
     open_delayed_single_impulse_dialog, add_data_to_plots
+from application.utils import open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
 from signal.signal import Signal
 
 
