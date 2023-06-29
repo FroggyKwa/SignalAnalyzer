@@ -19,10 +19,14 @@ def open_file_dialog(mainwindow):
         mainwindow.setup_signal_from_file(filename)
 
 
-def add_data_to_plots(window, plots):
+def add_data_to_plots(window, plots, **kwargs):
     from plot_widget import MyPlotWidget
     for name, plot in plots.items():
-        window.plots.append(MyPlotWidget(window, plot_data=plot, frequency=window.signal.frequency))
+        window.plots.append(
+            MyPlotWidget(
+                window,
+                plot_data=plot,
+                frequency=kwargs.get('frequency') or window.signal.frequency))
         window.graphs_layout.addWidget(window.plots[-1])
         checkbox = MyCheckBox(name, window.plots[-1], checked=True)
         checkbox.stateChanged.connect(checkbox.change_visible)
@@ -67,7 +71,10 @@ def open_delayed_single_impulse_dialog(parent=None):
 def model_plot(window, plot_type=None, **kwargs):
     try:
         add_data_to_plots(
-            window, {plot_modelling.generate_name(window.signal, plot_type): plot_modelling.model_plot(
-                plot_type=plot_modelling.PlotType.delayed_single_impulse, **kwargs)})
+            window,
+            {plot_modelling.generate_name(window.signal, plot_type): plot_modelling.model_plot(
+                plot_type=plot_modelling.PlotType.delayed_single_impulse,
+                **kwargs)},
+            frequency=kwargs.get('frequency'))
     except ValueError:
         open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')

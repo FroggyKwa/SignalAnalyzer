@@ -66,7 +66,6 @@ class DelayedSingleImpulse(QDialog):
                         frequency=float(self.frequency_text_edit.toPlainText()),
                         start=int(self.start.toPlainText()),
                         end=int(self.end.toPlainText()))
-
         except ValueError:
             open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
         model_plot(self.parent(), plot_type=self.plot_type.name, **data)
