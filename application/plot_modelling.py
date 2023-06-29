@@ -1,20 +1,20 @@
-from math import pi, sin, radians, exp, cos
 from enum import Enum
 
 import numpy as np
+from math import pi, sin, radians, exp, cos
 
 
 class PlotType(Enum):
-    delayed_single_impulse = 0
-    delayed_single_leap = 1
-    decreasing_exp = 2
-    sinusoid = 3
-    meander = 4
-    saw = 5
-    exp_envelope = 6
-    balance_envelope = 7
-    tonal_envelope = 8
-    linear_frequency_modulation = 9
+    delayed_single_impulse = 1
+    delayed_single_leap = 2
+    decreasing_exp = 3
+    sinusoid = 4
+    meander = 5
+    saw = 6
+    exp_envelope = 7
+    balance_envelope = 8
+    tonal_envelope = 9
+    linear_frequency_modulation = 10
 
 
 def model_plot(plot_type: PlotType, start: int = 0, end: int = 60, frequency: float = 1, n0: int = 0, a: float = 1,
@@ -47,3 +47,10 @@ def model_plot(plot_type: PlotType, start: int = 0, end: int = 60, frequency: fl
         case PlotType.linear_frequency_modulation:
             return times, [a * cos(radians(2 * pi * (fo + (fk - fo) * times[i] / (start - end)) * times[i] + fi)) for i
                            in range(n)]
+
+
+def generate_name(signal, plot_model_name: None | str):
+    j = PlotType[plot_model_name].value
+    signal.models[plot_model_name] += 1
+    k = signal.models[plot_model_name]
+    return f'Model_{j}_{k}'

@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QDialog, QMessageBox
 from application import consts
 from application.consts import ABOUT_PATH, FRAGMENT_PATH, SINUSOID_PATH, MEANDER_PATH, SAW_PATH
 from application.consts import ABOUT_PATH, FRAGMENT_PATH, DELAYED_SINGLE_IMPULSE
+from plot_modelling import PlotType
 
 
 class AboutDialog(QDialog):
@@ -83,18 +84,29 @@ class FragmentDialog(QDialog):
 
 
 class DelayedSingleImpulse(QDialog):
-    def __init__(self):
-        super(QDialog, self).__init__()
+    def __init__(self, parent=None):
+        super(QDialog, self).__init__(parent=parent)
         uic.loadUi(DELAYED_SINGLE_IMPULSE, self)
+        self.plot_type = PlotType.delayed_single_impulse
         self.setupUi()
         self.show()
 
     def setupUi(self):
         self.setFixedSize(349, 190)
         self.build_plot_button.clicked.connect(self.btn_clicked)
+        if self.parent().signal.frequency:
+            self.frequency_text_edit.setPlainText(str(self.parent().signal.frequency))
 
     def btn_clicked(self):
-        pass
+        from utils import model_plot
+        try:
+            data = dict(n0=int(self.n_0.toPlainText()),
+                        frequency=float(self.frequency_text_edit.toPlainText()),
+                        start=int(self.start.toPlainText()),
+                        end=int(self.end.toPlainText()))
+        except ValueError:
+            open_warning_messagebox('Ошибка!', 'Неверный формат ввода!')
+        model_plot(self.parent(), plot_type=self.plot_type.name, **data)
 
 
 def open_warning_messagebox(title, text):
