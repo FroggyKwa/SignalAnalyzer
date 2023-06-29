@@ -5,9 +5,9 @@ import pyqtgraph as pg
 from PyQt5.QtWidgets import QMenu
 from pyqtgraph import PlotWidget, InfiniteLine
 
-from consts import SIGNAL_FRAGMENT_ACTION_TEXT
+from consts import SIGNAL_FRAGMENT_ACTION_TEXT, STATISTICS_ACTION_TEXT
 from dialogs import open_warning_messagebox
-from utils import show_fragment_dialog
+from utils import show_fragment_dialog, show_statistics_for_current
 
 
 class MyPlotWidget(PlotWidget):
@@ -25,9 +25,12 @@ class MyPlotWidget(PlotWidget):
     def contextMenuEvent(self, event):
         contextMenu = QMenu(self)
         fragment_action = contextMenu.addAction(SIGNAL_FRAGMENT_ACTION_TEXT)
+        stats_action = contextMenu.addAction(STATISTICS_ACTION_TEXT)
         action = contextMenu.exec_(self.mapToGlobal(event.pos()))
         if action == fragment_action:
             show_fragment_dialog(self)
+        elif action == stats_action:
+            show_statistics_for_current(plot=self.plot_data)
 
     def mouse_clicked(self, event):
         vb = self.plotItem.vb

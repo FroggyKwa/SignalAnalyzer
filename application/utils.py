@@ -67,8 +67,11 @@ def add_data_to_plots(window, plots, **kwargs):
         # QAction.triggered.connect()
 
 
-def show_statistics_for_current(mw):
-    plot = mw.sender().plot[1]
+def show_statistics_for_current(mw=None, plot=None):
+    if plot is None and mw is not None:
+        plot = mw.sender().plot[1]
+    else:
+        plot = plot[1]
     threading.Thread(target=lambda: StatisticDialog(
         standard_deviation=numpy.std(plot),
         average=statistics.mean(plot), dispersion=statistics.variance(plot),

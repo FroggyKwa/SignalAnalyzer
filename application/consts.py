@@ -59,6 +59,8 @@ SIGNAL_INFORMATION_ACTION_TEXT = 'Информация о сигнале'
 
 SIGNAL_FRAGMENT_ACTION_TEXT = 'Фрагмент'
 
+STATISTICS_ACTION_TEXT = 'Статистика'
+
 ERROR_TITLE = 'Ошибка!'
 ERROR_TEXT = 'Произошла ошибка при чтении файла! \nНеверный формат!'
 
