@@ -2,12 +2,11 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QAction
 
 from application.consts import *
-
 from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
     open_delayed_single_impulse_dialog, add_data_to_plots, open_delayed_single_leap_dialog, open_decreasing_exp_dialog, \
-    open_exp_envelope_dialog, open_balance_envelope_dialog, open_white_noise_dialog, open_white_noise_normalised_dialog, save_as, save_file_dialog,
-
+    open_exp_envelope_dialog, open_balance_envelope_dialog, open_white_noise_dialog, open_white_noise_normalised_dialog, \
+    save_as, save_file_dialog
 from application.utils import open_meander_dialog, open_saw_dialog, open_sinusoid_dialog
 from signal.signal import Signal
 
@@ -66,7 +65,6 @@ class MainWindow(QMainWindow):
         self.exp_envelope_action.triggered.connect(lambda: open_exp_envelope_dialog(self))
         self.balance_envelope_action.triggered.connect(lambda: open_balance_envelope_dialog(self))
 
-
         self.white_noise_action = QAction(WHITE_NOISE_INTERVAL_NAME, self)
         self.white_noise_action.triggered.connect(lambda: open_white_noise_dialog(self))
 
@@ -81,7 +79,6 @@ class MainWindow(QMainWindow):
         self.menu_2.addAction(self.saw_action)
         self.menu_2.addAction(self.white_noise_action)
         self.menu_2.addAction(self.white_noise_nornalised_action)
-
 
         # Analyzing menu action
 
