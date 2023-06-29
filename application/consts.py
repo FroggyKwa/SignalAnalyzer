@@ -8,6 +8,7 @@ SAW_NAME = 'Пила'
 SINUSOID_NAME = 'Дискретизированная синусоида'
 MEANDER_NAME = 'Меандр'
 
+
 MODELING_PATH = 'ui/Modeling.ui'
 MODELING_TITLE = 'Моделирование'
 

@@ -35,9 +35,6 @@ class MainWindow(QMainWindow):
         self.open_meander = QAction(MEANDER_NAME, self)
         self.saw = QAction(SAW_NAME, self)
         self.menu_2.addAction(self.open_sinusoid)
-        self.open_sinusoid.triggered.connect(
-
-        )
         self.menu_2.addAction(self.open_meander)
         self.menu_2.addAction(self.saw)
 
