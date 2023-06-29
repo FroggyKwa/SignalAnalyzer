@@ -108,3 +108,11 @@ def open_saw_dialog(parent=None):
 
 def open_meander_dialog(parent=None):
     MeanderDialog(parent=parent).exec()
+
+
+def sum_plots(p1, p2):
+    return p1[0], [p1[1][i] + p2[1][i] for i in range(len(p1[1]))]
+
+
+def multiple_plots(p1, p2):
+    return p1[0], [p1[1][i] * p2[1][i] for i in range(len(p1[1]))]
