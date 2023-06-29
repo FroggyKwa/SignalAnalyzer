@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QMainWindow, QAction
 
 from application.consts import MAINWINDOW_PATH, OPEN_ACTION_TEXT, SIGNAL_INFORMATION_ACTION_TEXT, ERROR_TITLE, \
     ERROR_TEXT, SINUSOID_NAME, SAW_NAME, MEANDER_NAME, DELAYED_SINGLE_LEAP_NAME, DELAYED_SINGLE_IMPULSE_NAME, \
+    DECREASING_EXP_NAME
     DECREASING_EXP, ADDITION_CHANNELS_NAME, MULTIPLICATION_CHANNELS_NAME
 from application.dialogs import open_warning_messagebox
 from application.utils import open_file_dialog, show_signal_information, open_about_us_dialog, \
@@ -41,9 +42,9 @@ class MainWindow(QMainWindow):
         self.menu_2.addAction(self.sinusoid_action)
         self.menu_2.addAction(self.saw_action)
 
-        self.sinusoid_action.triggered.connect(open_sinusoid_dialog)
-        self.meander_action.triggered.connect(open_meander_dialog)
-        self.saw_action.triggered.connect(open_saw_dialog)
+        self.sinusoid_action.triggered.connect(lambda: open_sinusoid_dialog(self))
+        self.meander_action.triggered.connect(lambda: open_meander_dialog(self))
+        self.saw_action.triggered.connect(lambda: open_saw_dialog(self))
 
         self.delayed_single_impulse_action = QAction(DELAYED_SINGLE_IMPULSE_NAME, self)
         self.delayed_single_impulse_action.triggered.connect(
@@ -51,7 +52,7 @@ class MainWindow(QMainWindow):
         )
         self.delayed_single_leap_action = QAction(DELAYED_SINGLE_LEAP_NAME, self)
         self.delayed_single_leap_action.triggered.connect(open_delayed_single_leap_dialog)
-        self.dicreasing_exp = QAction(DECREASING_EXP, self)
+        self.dicreasing_exp = QAction(DECREASING_EXP_NAME, self)
         self.dicreasing_exp.triggered.connect(open_decreasing_exp_dialog)
 
         self.open_sinusoid = QAction(SINUSOID_NAME, self)

@@ -15,7 +15,7 @@ MEANDER_PATH = 'ui/meander_dialog.ui'
 
 DELAYED_SINGLE_IMPULSE_NAME = 'Задержанный единичный импульс'
 DELAYED_SINGLE_LEAP_NAME = 'Задержанный единичный скачок'
-DECREASING_EXP = 'Дискретизированная убывающая экспонента'
+DECREASING_EXP_NAME = 'Дискретизированная убывающая экспонента'
 
 
 WHITE_NOISE_INTERVAL_NAME = 'Сигнала белого шума,  равномерно распределенного в интервале'
@@ -41,10 +41,10 @@ ABOUT_US_TITLE = 'About us!'
 
 SCALED_PLOT_PATH = 'ui/ScaledPlot.ui'
 
-DELAYED_SINGLE_IMPULSE = 'ui/DelayedSingleImpulse.ui'
+DELAYED_SINGLE_IMPULSE_PATH = 'ui/DelayedSingleImpulse.ui'
 
 
-DELAYED_SINGLE_IMPULSE = 'ui/DelayedSingleImpulse.ui'
+DELAYED_SINGLE_IMPULSE_PATH = 'ui/DelayedSingleImpulse.ui'
 DELAYED_SINGLE_LEAP_PATH = 'ui/DelayedSingleLeap.ui'
 DECREASING_EXP_PATH = 'ui/DiscretizedDecreasingExponent.ui'
 
@@ -59,4 +59,6 @@ ERROR_TITLE = 'Ошибка!'
 ERROR_TEXT = 'Произошла ошибка при чтении файла! \nНеверный формат!'
 
 EXP_ENVELOPE_PATH = 'ui/ExpEnvelope.ui'
+
+EXP_ENVELOPE_NAME = 'Сигнал с экспоненциальной огибающей - амплитудная модуляция'
 BALANCE_ENVELOPE_PATH = 'ui/BalanceEnvelope.ui'
