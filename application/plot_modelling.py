@@ -21,7 +21,7 @@ class PlotType(Enum):
     autoregressive = 13
 
 
-def model_plot(plot_type: PlotType, duration: int = 60, frequency: float = 1, n0: int = 0, a: float | int = 1,
+def model_plot(plot_type: PlotType, duration: int = 7200, frequency: float = 1, n0: int = 0, a: float | int = 1,
                fi: float = 0, l: float = 1, t: float = 1,
                fn: float = 0, fo: float = 0, m: float = 0, fk: float = 0, w: float = 0, b: int = 10,
                sigma: float = 1):
@@ -53,7 +53,7 @@ def model_plot(plot_type: PlotType, duration: int = 60, frequency: float = 1, n0
             return times, [a * cos(radians(2 * pi * (fo + (fk - fo) * times[i] / duration) * times[i] + fi)) for i in
                            range(n)]
         case PlotType.white_noise:
-            return times, [randint(a, b) + randint(0, 999) / 1000 for i in range(n)]
+            return times, [randint(a, b - 1) + randint(0, 999) / 1000 for i in range(n)]
         case PlotType.white_noise_normalised:
             return times, [normalvariate(a, sigma) for i in range(n)]
 
